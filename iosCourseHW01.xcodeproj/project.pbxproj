@@ -10,6 +10,7 @@
 		387CF72E04F8D7F2913B6F3E /* Pods_iosCourseHW01.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 225B8CBE86778DB066447047 /* Pods_iosCourseHW01.framework */; };
 		ED08D23C262736D7008AC25D /* TextFieldWithPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED08D23B262736D7008AC25D /* TextFieldWithPadding.swift */; };
 		EDBAF2FC262746230036B977 /* QuizzesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBAF2FB262746230036B977 /* QuizzesViewController.swift */; };
+		EDBAF2FF262762230036B977 /* QuizCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBAF2FE262762230036B977 /* QuizCard.swift */; };
 		EDCA4374262740E80009E250 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCA436D262740E80009E250 /* DataService.swift */; };
 		EDCA4375262740E80009E250 /* QuizCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCA436F262740E80009E250 /* QuizCategory.swift */; };
 		EDCA4376262740E80009E250 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCA4370262740E80009E250 /* Question.swift */; };
@@ -29,6 +30,7 @@
 		D345DDD1A7A1EB8CA01B30EB /* Pods-iosCourseHW01.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosCourseHW01.release.xcconfig"; path = "Target Support Files/Pods-iosCourseHW01/Pods-iosCourseHW01.release.xcconfig"; sourceTree = "<group>"; };
 		ED08D23B262736D7008AC25D /* TextFieldWithPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithPadding.swift; sourceTree = "<group>"; };
 		EDBAF2FB262746230036B977 /* QuizzesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzesViewController.swift; sourceTree = "<group>"; };
+		EDBAF2FE262762230036B977 /* QuizCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizCard.swift; sourceTree = "<group>"; };
 		EDCA436D262740E80009E250 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		EDCA436F262740E80009E250 /* QuizCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizCategory.swift; sourceTree = "<group>"; };
 		EDCA4370262740E80009E250 /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				EDEE226E2626FA1600336B2C /* LoginViewController.swift */,
 				ED08D23B262736D7008AC25D /* TextFieldWithPadding.swift */,
 				EDBAF2FB262746230036B977 /* QuizzesViewController.swift */,
+				EDBAF2FE262762230036B977 /* QuizCard.swift */,
 			);
 			path = iosCourseHW01;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 				EDBAF2FC262746230036B977 /* QuizzesViewController.swift in Sources */,
 				EDCA4379262740E80009E250 /* DataServiceProtocol.swift in Sources */,
 				EDEE224F2626E30C00336B2C /* SceneDelegate.swift in Sources */,
+				EDBAF2FF262762230036B977 /* QuizCard.swift in Sources */,
 				EDCA4376262740E80009E250 /* Question.swift in Sources */,
 				EDCA4374262740E80009E250 /* DataService.swift in Sources */,
 				EDCA4378262740E80009E250 /* Quiz.swift in Sources */,
