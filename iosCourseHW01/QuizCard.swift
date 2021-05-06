@@ -4,14 +4,16 @@
 //
 //  Created by Ivan Skorupan on 14.04.2021..
 //
-
 import Foundation
 import SnapKit
 import UIKit
 
 class QuizCard: UITableViewCell {
     
-    let icon = UIImageView(image: UIImage(named: "football-strategy.jpeg"))
+    private let CORNER_RADIUS: CGFloat = 10
+    
+    let cellContentView = UIView()
+    let icon = UIImageView(image: UIImage(named: "football"))
     let title = UILabel()
     let desc = UILabel()
     let difficulty = UILabel()
@@ -19,33 +21,48 @@ class QuizCard: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        title.font = UIFont(name: "ArialMT", size: 12)
-        desc.font = UIFont(name: "ArialMT", size: 10)
-        difficulty.font = UIFont(name: "ArialMT", size: 12)
+        cellContentView.backgroundColor = UIColor.white.withAlphaComponent(0.3)
+        cellContentView.layer.cornerRadius = CORNER_RADIUS
         
-        contentView.addSubview(icon)
-        contentView.addSubview(title)
-        contentView.addSubview(desc)
-        contentView.addSubview(difficulty)
+        icon.layer.masksToBounds = true
+        icon.layer.cornerRadius = CORNER_RADIUS
         
-        contentView.snp.makeConstraints { make -> Void in
-            make.left.right.equalToSuperview()
-            make.height.equalTo(100)
+        title.font = UIFont(name: "SourceSansPro-Bold", size: 18)
+        title.textColor = .white
+        title.numberOfLines = 0
+        title.preferredMaxLayoutWidth = 200
+        
+        desc.font = UIFont(name: "SourceSansPro-SemiBold", size: 14)
+        desc.textColor = .white
+        desc.numberOfLines = 0
+        
+        difficulty.font = UIFont(name: "SourceSansPro-SemiBold", size: 13)
+        difficulty.textColor = .white
+        
+        addSubview(cellContentView)
+        cellContentView.addSubview(icon)
+        cellContentView.addSubview(title)
+        cellContentView.addSubview(desc)
+        cellContentView.addSubview(difficulty)
+        
+        cellContentView.snp.makeConstraints { make -> Void in
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0))
         }
         
         icon.snp.makeConstraints { make -> Void in
-            make.centerY.equalToSuperview()
-            make.left.equalToSuperview().offset(5)
-            make.size.equalTo(CGSize(width: 80, height: 70))
+            make.leading.top.equalToSuperview().offset(15)
+            make.bottom.equalToSuperview().inset(15)
+            make.width.lessThanOrEqualTo(100)
         }
         
         title.snp.makeConstraints { make -> Void in
-            make.top.equalTo(icon.snp.top).offset(10)
-            make.left.equalTo(icon.snp.right).offset(5)
-        }
+            make.top.equalTo(icon.snp.top).offset(15)
+            make.leading.equalTo(icon.snp.trailing).offset(10)
+            make.trailing.equalToSuperview().inset(15)        }
         
         desc.snp.makeConstraints { make -> Void in
-            make.left.equalTo(title.snp.left)
+            make.leading.equalTo(title.snp.leading)
+            make.trailing.equalToSuperview().inset(15)
             make.top.equalTo(title.snp.bottom).offset(10)
         }
         
@@ -57,11 +74,6 @@ class QuizCard: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 5, right: 0))
     }
     
 }

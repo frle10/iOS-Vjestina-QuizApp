@@ -10,11 +10,15 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    private let CORNER_RADIUS: CGFloat = 10
+    
     private var appNameLabel: UILabel!
     private var emailTextField: UITextField!
     private var passwordTextField: UITextField!
     private var loginButton: UIButton!
     private var errorLabel: UILabel!
+    
+    private var gradientLayer: CAGradientLayer!
     
     private var dataService = DataService()
     
@@ -27,10 +31,14 @@ class LoginViewController: UIViewController {
         addActions()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        gradientLayer.frame = view.bounds
+    }
+    
     private func createViews() {
         appNameLabel = UILabel()
         view.addSubview(appNameLabel)
-        appNameLabel.text = "PopQuiz"
         
         emailTextField = TextFieldWithPadding()
         view.addSubview(emailTextField)
@@ -40,42 +48,42 @@ class LoginViewController: UIViewController {
         
         loginButton = UIButton()
         view.addSubview(loginButton)
-        loginButton.setTitle("Login", for: .normal)
         
         errorLabel = UILabel()
         view.addSubview(errorLabel)
-        errorLabel.text = "Login unsuccessful."
     }
     
     private func styleViews() {
-        view.backgroundColor = .white
+        gradientLayer = CAGradientLayer()
+        gradientLayer.frame = view.bounds
+        gradientLayer.colors = [UIColor(hex: "#744FA3FF").cgColor, UIColor(hex: "#272F76FF").cgColor]
+        gradientLayer.locations = [0.1, 1.0]
+        view.layer.insertSublayer(gradientLayer, at: 0)
         
-        let gradient = CAGradientLayer()
-        gradient.frame = view.bounds
-        gradient.colors = [UIColor(red: 0.453, green: 0.309, blue: 0.637, alpha: 1).cgColor, UIColor(red: 0.152, green: 0.184, blue: 0.461, alpha: 1).cgColor]
-        gradient.locations = [0.1, 1.0]
-        view.layer.insertSublayer(gradient, at: 0)
-        
+        appNameLabel.text = "PopQuiz"
         appNameLabel.textColor = .white
-        appNameLabel.font = UIFont(name: "Arial-BoldMT", size: 32)
+        appNameLabel.font = UIFont(name: "SourceSansPro-Bold", size: 32)
         
-        emailTextField.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.3)
+        emailTextField.backgroundColor = UIColor.white.withAlphaComponent(0.3)
         emailTextField.textColor = .white
-        emailTextField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        emailTextField.layer.cornerRadius = 10
+        emailTextField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont(name: "SourceSansPro-Regular", size: 16)!])
+        emailTextField.layer.cornerRadius = CORNER_RADIUS
         
-        passwordTextField.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.3)
+        passwordTextField.backgroundColor = UIColor.white.withAlphaComponent(0.3)
         passwordTextField.textColor = .white
-        passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        passwordTextField.layer.cornerRadius = 10
+        passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont(name: "SourceSansPro-Regular", size: 16)!])
+        passwordTextField.layer.cornerRadius = CORNER_RADIUS
         passwordTextField.isSecureTextEntry = true
         
-        loginButton.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.5)
-        loginButton.setTitleColor(UIColor(red: 0.387, green: 0.16, blue: 0.867, alpha: 1), for: .normal)
-        loginButton.layer.cornerRadius = 10
-        loginButton.titleLabel?.font = UIFont(name: "Arial-BoldMT", size: 16)
+        loginButton.setTitle("Login", for: .normal)
+        loginButton.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        loginButton.setTitleColor(UIColor(hex: "#6329DEFF"), for: .normal)
+        loginButton.layer.cornerRadius = CORNER_RADIUS
+        loginButton.titleLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 16)
         loginButton.isEnabled = false
         
+        errorLabel.text = "Login unsuccessful."
+        errorLabel.font = UIFont(name: "SourceSansPro-Regular", size: 14)
         errorLabel.textColor = .white
         errorLabel.isHidden = true
     }
@@ -113,7 +121,6 @@ class LoginViewController: UIViewController {
     private func addActions() {
         emailTextField.addTarget(self, action: #selector(textfieldChanged), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(textfieldChanged), for: .editingChanged)
-        
         loginButton.addTarget(self, action: #selector(login), for: .touchUpInside)
     }
     
@@ -121,12 +128,7 @@ class LoginViewController: UIViewController {
     private func textfieldChanged() {
         errorLabel.isHidden = true
         loginButton.isEnabled = emailTextField.text != "" && passwordTextField.text != ""
-        
-        if loginButton.isEnabled {
-            loginButton.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-        } else {
-            loginButton.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.5)
-        }
+        loginButton.backgroundColor = loginButton.isEnabled ? UIColor.white : UIColor.white.withAlphaComponent(0.5);
     }
     
     @objc

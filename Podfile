@@ -6,5 +6,5 @@ target 'iosCourseHW01' do
   use_frameworks!
 
   # Pods for iosCourseHW01
-  pod 'SnapKit', '~> 5.0.0'
+  pod 'SnapKit', '~> 5.0.1'
 end

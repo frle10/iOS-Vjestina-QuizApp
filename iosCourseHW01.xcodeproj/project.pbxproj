@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		387CF72E04F8D7F2913B6F3E /* Pods_iosCourseHW01.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 225B8CBE86778DB066447047 /* Pods_iosCourseHW01.framework */; };
 		ED08D23C262736D7008AC25D /* TextFieldWithPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED08D23B262736D7008AC25D /* TextFieldWithPadding.swift */; };
+		ED2ECFA826419BAF00570060 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2ECFA726419BAF00570060 /* UIColorExtensions.swift */; };
 		EDBAF2FC262746230036B977 /* QuizzesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBAF2FB262746230036B977 /* QuizzesViewController.swift */; };
 		EDBAF2FF262762230036B977 /* QuizCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBAF2FE262762230036B977 /* QuizCard.swift */; };
 		EDCA4374262740E80009E250 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCA436D262740E80009E250 /* DataService.swift */; };
@@ -17,6 +18,10 @@
 		EDCA4377262740E80009E250 /* LoginStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCA4371262740E80009E250 /* LoginStatus.swift */; };
 		EDCA4378262740E80009E250 /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCA4372262740E80009E250 /* Quiz.swift */; };
 		EDCA4379262740E80009E250 /* DataServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCA4373262740E80009E250 /* DataServiceProtocol.swift */; };
+		EDCC56782643E4C6007F969D /* ThemeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCC56772643E4C6007F969D /* ThemeConstants.swift */; };
+		EDCC567D2644404A007F969D /* SourceSansPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDCC567A2644404A007F969D /* SourceSansPro-Bold.ttf */; };
+		EDCC567E2644404A007F969D /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDCC567B2644404A007F969D /* SourceSansPro-Regular.ttf */; };
+		EDCC567F2644404A007F969D /* SourceSansPro-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDCC567C2644404A007F969D /* SourceSansPro-SemiBold.ttf */; };
 		EDEE224D2626E30C00336B2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEE224C2626E30C00336B2C /* AppDelegate.swift */; };
 		EDEE224F2626E30C00336B2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEE224E2626E30C00336B2C /* SceneDelegate.swift */; };
 		EDEE22562626E30D00336B2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDEE22552626E30D00336B2C /* Assets.xcassets */; };
@@ -29,6 +34,7 @@
 		2A543536D86AC40B5CB466CD /* Pods-iosCourseHW01.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosCourseHW01.debug.xcconfig"; path = "Target Support Files/Pods-iosCourseHW01/Pods-iosCourseHW01.debug.xcconfig"; sourceTree = "<group>"; };
 		D345DDD1A7A1EB8CA01B30EB /* Pods-iosCourseHW01.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosCourseHW01.release.xcconfig"; path = "Target Support Files/Pods-iosCourseHW01/Pods-iosCourseHW01.release.xcconfig"; sourceTree = "<group>"; };
 		ED08D23B262736D7008AC25D /* TextFieldWithPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithPadding.swift; sourceTree = "<group>"; };
+		ED2ECFA726419BAF00570060 /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		EDBAF2FB262746230036B977 /* QuizzesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzesViewController.swift; sourceTree = "<group>"; };
 		EDBAF2FE262762230036B977 /* QuizCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizCard.swift; sourceTree = "<group>"; };
 		EDCA436D262740E80009E250 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
@@ -37,6 +43,10 @@
 		EDCA4371262740E80009E250 /* LoginStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginStatus.swift; sourceTree = "<group>"; };
 		EDCA4372262740E80009E250 /* Quiz.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
 		EDCA4373262740E80009E250 /* DataServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataServiceProtocol.swift; sourceTree = "<group>"; };
+		EDCC56772643E4C6007F969D /* ThemeConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeConstants.swift; sourceTree = "<group>"; };
+		EDCC567A2644404A007F969D /* SourceSansPro-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Bold.ttf"; sourceTree = "<group>"; };
+		EDCC567B2644404A007F969D /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
+		EDCC567C2644404A007F969D /* SourceSansPro-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-SemiBold.ttf"; sourceTree = "<group>"; };
 		EDEE22492626E30C00336B2C /* iosCourseHW01.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosCourseHW01.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDEE224C2626E30C00336B2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDEE224E2626E30C00336B2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +98,16 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		EDCC567926443EF8007F969D /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				EDCC567A2644404A007F969D /* SourceSansPro-Bold.ttf */,
+				EDCC567B2644404A007F969D /* SourceSansPro-Regular.ttf */,
+				EDCC567C2644404A007F969D /* SourceSansPro-SemiBold.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
 		EDEE22402626E30C00336B2C = {
 			isa = PBXGroup;
 			children = (
@@ -109,6 +129,7 @@
 		EDEE224B2626E30C00336B2C /* iosCourseHW01 */ = {
 			isa = PBXGroup;
 			children = (
+				EDCC567926443EF8007F969D /* fonts */,
 				EDCA436C262740E80009E250 /* Data */,
 				EDEE224C2626E30C00336B2C /* AppDelegate.swift */,
 				EDEE224E2626E30C00336B2C /* SceneDelegate.swift */,
@@ -119,6 +140,8 @@
 				ED08D23B262736D7008AC25D /* TextFieldWithPadding.swift */,
 				EDBAF2FB262746230036B977 /* QuizzesViewController.swift */,
 				EDBAF2FE262762230036B977 /* QuizCard.swift */,
+				ED2ECFA726419BAF00570060 /* UIColorExtensions.swift */,
+				EDCC56772643E4C6007F969D /* ThemeConstants.swift */,
 			);
 			path = iosCourseHW01;
 			sourceTree = "<group>";
@@ -192,6 +215,9 @@
 			files = (
 				EDEE22562626E30D00336B2C /* Assets.xcassets in Resources */,
 				EDEE22692626E3EC00336B2C /* LaunchScreen.storyboard in Resources */,
+				EDCC567F2644404A007F969D /* SourceSansPro-SemiBold.ttf in Resources */,
+				EDCC567D2644404A007F969D /* SourceSansPro-Bold.ttf in Resources */,
+				EDCC567E2644404A007F969D /* SourceSansPro-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,8 +272,10 @@
 			files = (
 				EDEE226F2626FA1600336B2C /* LoginViewController.swift in Sources */,
 				EDCA4377262740E80009E250 /* LoginStatus.swift in Sources */,
+				ED2ECFA826419BAF00570060 /* UIColorExtensions.swift in Sources */,
 				ED08D23C262736D7008AC25D /* TextFieldWithPadding.swift in Sources */,
 				EDCA4375262740E80009E250 /* QuizCategory.swift in Sources */,
+				EDCC56782643E4C6007F969D /* ThemeConstants.swift in Sources */,
 				EDEE224D2626E30C00336B2C /* AppDelegate.swift in Sources */,
 				EDBAF2FC262746230036B977 /* QuizzesViewController.swift in Sources */,
 				EDCA4379262740E80009E250 /* DataServiceProtocol.swift in Sources */,

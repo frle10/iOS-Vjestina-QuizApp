@@ -4,20 +4,26 @@
 //
 //  Created by Ivan Skorupan on 14.04.2021..
 //
-
 import Foundation
 import SnapKit
 import UIKit
 
 class QuizzesViewController: UIViewController {
     
+    private let CORNER_RADIUS: CGFloat = 10
+    
     let cellIdentifier = "cellId"
+    
+    private var quizzesScrollView: UIScrollView!
+    private var quizzesView: UIView!
     
     private var appNameLabel: UILabel!
     private var getQuizButton: UIButton!
     private var funFactLabel: UILabel!
     private var nbaCountLabel: UILabel!
     private var quizTable: UITableView!
+    
+    private var gradientLayer: CAGradientLayer!
     
     private var dataService: DataService = DataService()
     private var quizzes: [Quiz] = []
@@ -32,65 +38,85 @@ class QuizzesViewController: UIViewController {
         addActions()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        gradientLayer.frame = view.bounds
+    }
+    
     private func createViews() {
+        quizzesScrollView = UIScrollView()
+        view.addSubview(quizzesScrollView)
+        
+        quizzesView = UIView()
+        quizzesScrollView.addSubview(quizzesView)
+        
         appNameLabel = UILabel()
-        view.addSubview(appNameLabel)
-        appNameLabel.text = "PopQuiz"
+        quizzesView.addSubview(appNameLabel)
         
         getQuizButton = UIButton()
-        view.addSubview(getQuizButton)
-        getQuizButton.setTitle("Get Quiz", for: .normal)
+        quizzesView.addSubview(getQuizButton)
         
         funFactLabel = UILabel()
-        view.addSubview(funFactLabel)
-        funFactLabel.text = "💡 Fun Fact"
+        quizzesView.addSubview(funFactLabel)
         
         nbaCountLabel = UILabel()
-        view.addSubview(nbaCountLabel)
-        nbaCountLabel.text = ""
-        nbaCountLabel.isHidden = true
+        quizzesView.addSubview(nbaCountLabel)
         
         quizTable = UITableView()
-        view.addSubview(quizTable)
+        quizzesView.addSubview(quizTable)
+        
         quizTable.register(QuizCard.self, forCellReuseIdentifier: cellIdentifier)
         quizTable.dataSource = self
         quizTable.delegate = self
     }
     
     private func styleViews() {
-        view.backgroundColor = .white
+        gradientLayer = CAGradientLayer()
+        gradientLayer.frame = view.bounds
+        gradientLayer.colors = [UIColor(hex: "#744FA3FF").cgColor, UIColor(hex: "#272F76FF").cgColor]
+        gradientLayer.locations = [0.1, 1.0]
+        view.layer.insertSublayer(gradientLayer, at: 0)
         
-        let gradient = CAGradientLayer()
-        gradient.frame = view.bounds
-        gradient.colors = [UIColor(red: 0.453, green: 0.309, blue: 0.637, alpha: 1).cgColor, UIColor(red: 0.152, green: 0.184, blue: 0.461, alpha: 1).cgColor]
-        gradient.locations = [0.1, 1.0]
-        view.layer.insertSublayer(gradient, at: 0)
-        
+        appNameLabel.text = "PopQuiz"
         appNameLabel.textColor = .white
-        appNameLabel.font = UIFont(name: "Arial-BoldMT", size: 24)
+        appNameLabel.font = UIFont(name: "SourceSansPro-Bold", size: 24)
         
-        getQuizButton.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-        getQuizButton.setTitleColor(UIColor(red: 0.387, green: 0.16, blue: 0.867, alpha: 1), for: .normal)
-        getQuizButton.layer.cornerRadius = 10
-        getQuizButton.titleLabel?.font = UIFont(name: "Arial-BoldMT", size: 16)
+        getQuizButton.setTitle("Get Quiz", for: .normal)
+        getQuizButton.backgroundColor = .white
+        getQuizButton.setTitleColor(UIColor(hex: "#6329DEFF"), for: .normal)
+        getQuizButton.layer.cornerRadius = 2 * CORNER_RADIUS
+        getQuizButton.titleLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 16)
         
+        funFactLabel.text = "💡 Fun Fact"
         funFactLabel.textColor = .white
-        funFactLabel.font = UIFont(name: "Arial-BoldMT", size: 20)
+        funFactLabel.font = UIFont(name: "SourceSansPro-Bold", size: 20)
         
+        nbaCountLabel.text = ""
+        nbaCountLabel.isHidden = true
         nbaCountLabel.textColor = .white
-        nbaCountLabel.font = UIFont(name: "ArialMT", size: 14)
+        nbaCountLabel.font = UIFont(name: "SourceSansPro-SemiBold", size: 18)
         nbaCountLabel.numberOfLines = 0
         
         quizTable.backgroundColor = .clear
+        quizTable.rowHeight = 150
+        quizTable.sectionHeaderHeight = 50
+        quizTable.isScrollEnabled = false
         quizTable.isHidden = true
-        quizTable.isScrollEnabled = true
-        quizTable.showsVerticalScrollIndicator = false
     }
     
     private func createConstraints() {
+        quizzesScrollView.snp.makeConstraints { make -> Void in
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 60, left: 20, bottom: 30, right: 20))
+        }
+        
+        quizzesView.snp.makeConstraints { make -> Void in
+            make.edges.width.equalToSuperview()
+            make.height.equalTo(800)
+        }
+        
         appNameLabel.snp.makeConstraints { make -> Void in
+            make.top.equalToSuperview()
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().inset(60)
         }
         
         getQuizButton.snp.makeConstraints { make -> Void in
@@ -100,21 +126,19 @@ class QuizzesViewController: UIViewController {
         }
         
         funFactLabel.snp.makeConstraints { make -> Void in
-            make.left.equalTo(getQuizButton.snp.left).offset(-10)
+            make.left.right.equalToSuperview()
             make.top.equalTo(getQuizButton.snp.bottom).offset(30)
         }
         
         nbaCountLabel.snp.makeConstraints { make -> Void in
             make.top.equalTo(funFactLabel.snp.bottom).offset(10)
-            make.left.equalTo(funFactLabel)
-            make.right.equalTo(getQuizButton.snp.right)
+            make.left.right.equalToSuperview()
         }
         
         quizTable.snp.makeConstraints { make -> Void in
             make.top.equalTo(nbaCountLabel.snp.bottom).offset(20)
-            make.left.equalTo(nbaCountLabel.snp.left)
-            make.right.equalToSuperview().offset(-20)
-            make.bottom.equalToSuperview().offset(-20)
+            make.left.right.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
     }
     
@@ -158,17 +182,18 @@ extension QuizzesViewController: UITableViewDataSource {
         
         cell.title.text = currentQuiz.title
         cell.desc.text = currentQuiz.description
-        cell.difficulty.text = "\(currentQuiz.level)"
-        cell.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.3)
-        cell.layer.cornerRadius = 10
+        cell.difficulty.text = "Difficulty: \(currentQuiz.level)"
+        
+        cell.backgroundColor = .clear
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UILabel()
-        headerView.textColor = .orange
+        headerView.textColor = UIColor(hex: "#F2C94CFF")
         headerView.text = categories[section].rawValue
+        headerView.font = UIFont(name: "SourceSansPro-Bold", size: 20)
         
         return headerView
     }
