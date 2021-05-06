@@ -8,7 +8,7 @@ import Foundation
 import SnapKit
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: GradientViewController {
     
     private let CORNER_RADIUS: CGFloat = 10
     
@@ -17,8 +17,6 @@ class LoginViewController: UIViewController {
     private var passwordTextField: UITextField!
     private var loginButton: UIButton!
     private var errorLabel: UILabel!
-    
-    private var gradientLayer: CAGradientLayer!
     
     private var dataService = DataService()
     
@@ -29,11 +27,6 @@ class LoginViewController: UIViewController {
         styleViews()
         createConstraints()
         addActions()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        gradientLayer.frame = view.bounds
     }
     
     private func createViews() {
@@ -54,12 +47,6 @@ class LoginViewController: UIViewController {
     }
     
     private func styleViews() {
-        gradientLayer = CAGradientLayer()
-        gradientLayer.frame = view.bounds
-        gradientLayer.colors = [UIColor(hex: "#744FA3FF").cgColor, UIColor(hex: "#272F76FF").cgColor]
-        gradientLayer.locations = [0.1, 1.0]
-        view.layer.insertSublayer(gradientLayer, at: 0)
-        
         appNameLabel.text = "PopQuiz"
         appNameLabel.textColor = .white
         appNameLabel.font = UIFont(name: "SourceSansPro-Bold", size: 32)
@@ -136,11 +123,9 @@ class LoginViewController: UIViewController {
         let loginResult = dataService.login(email: emailTextField.text!, password: passwordTextField.text!)
         
         if case LoginStatus.success = loginResult {
-            print("Username: " + emailTextField.text!)
-            print("Password: " + passwordTextField.text!)
+            router.showQuizzesController()
         } else {
             errorLabel.isHidden = false
-            print("Login unsuccessful.")
         }
     }
     

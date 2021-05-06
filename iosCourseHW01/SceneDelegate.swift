@@ -15,9 +15,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         else { return }
         
         window = UIWindow(windowScene: windowScene)
-        let vc = QuizzesViewController()
-        window!.rootViewController = vc
-        window?.makeKeyAndVisible()
+        let router = AppRouter(navigationController: UINavigationController())
+        router.setStartScreen(in: window)
     }
 
 }

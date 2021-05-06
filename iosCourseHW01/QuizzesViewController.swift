@@ -8,7 +8,7 @@ import Foundation
 import SnapKit
 import UIKit
 
-class QuizzesViewController: UIViewController {
+class QuizzesViewController: GradientViewController {
     
     private let CORNER_RADIUS: CGFloat = 10
     
@@ -23,8 +23,6 @@ class QuizzesViewController: UIViewController {
     private var nbaCountLabel: UILabel!
     private var quizTable: UITableView!
     
-    private var gradientLayer: CAGradientLayer!
-    
     private var dataService: DataService = DataService()
     private var quizzes: [Quiz] = []
     private var categories: [QuizCategory] = []
@@ -36,11 +34,6 @@ class QuizzesViewController: UIViewController {
         styleViews()
         createConstraints()
         addActions()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        gradientLayer.frame = view.bounds
     }
     
     private func createViews() {
@@ -71,12 +64,6 @@ class QuizzesViewController: UIViewController {
     }
     
     private func styleViews() {
-        gradientLayer = CAGradientLayer()
-        gradientLayer.frame = view.bounds
-        gradientLayer.colors = [UIColor(hex: "#744FA3FF").cgColor, UIColor(hex: "#272F76FF").cgColor]
-        gradientLayer.locations = [0.1, 1.0]
-        view.layer.insertSublayer(gradientLayer, at: 0)
-        
         appNameLabel.text = "PopQuiz"
         appNameLabel.textColor = .white
         appNameLabel.font = UIFont(name: "SourceSansPro-Bold", size: 24)
@@ -90,6 +77,7 @@ class QuizzesViewController: UIViewController {
         funFactLabel.text = "💡 Fun Fact"
         funFactLabel.textColor = .white
         funFactLabel.font = UIFont(name: "SourceSansPro-Bold", size: 20)
+        funFactLabel.isHidden = true
         
         nbaCountLabel.text = ""
         nbaCountLabel.isHidden = true
@@ -158,6 +146,8 @@ class QuizzesViewController: UIViewController {
         nbaCountLabel.text = "There are \(nbaCount) questions that contain the word \"NBA\""
         nbaCountLabel.isHidden = false
         
+        funFactLabel.isHidden = false
+        
         quizTable.reloadData()
         quizTable.isHidden = false
     }
@@ -175,10 +165,10 @@ extension QuizzesViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! QuizCard
+        let cell: QuizCard = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! QuizCard
         
-        let quizzesInSection = quizzes.filter { $0.category == categories[indexPath.section] }
-        let currentQuiz = quizzesInSection[indexPath.row]
+        let quizzesInSection: [Quiz] = quizzes.filter { $0.category == categories[indexPath.section] }
+        let currentQuiz: Quiz = quizzesInSection[indexPath.row]
         
         cell.title.text = currentQuiz.title
         cell.desc.text = currentQuiz.description
