@@ -30,10 +30,16 @@ class QuizzesViewController: GradientViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.backButtonTitle = ""
+        
         createViews()
         styleViews()
         createConstraints()
         addActions()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = true
     }
     
     private func createViews() {
@@ -126,7 +132,7 @@ class QuizzesViewController: GradientViewController {
         quizTable.snp.makeConstraints { make -> Void in
             make.top.equalTo(nbaCountLabel.snp.bottom).offset(20)
             make.left.right.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.bottom.equalTo(quizzesView.safeAreaLayoutGuide.snp.bottom)
         }
     }
     
@@ -175,6 +181,7 @@ extension QuizzesViewController: UITableViewDataSource {
         cell.difficulty.text = "Difficulty: \(currentQuiz.level)"
         
         cell.backgroundColor = .clear
+        cell.selectionStyle = .none
         
         return cell
     }
@@ -194,6 +201,11 @@ extension QuizzesViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let quizzesInSection: [Quiz] = quizzes.filter { $0.category == categories[indexPath.section] }
+        let currentQuiz: Quiz = quizzesInSection[indexPath.row]
+        
+        router.showQuizController(quiz: currentQuiz)
     }
     
 }

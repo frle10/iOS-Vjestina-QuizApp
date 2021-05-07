@@ -29,6 +29,11 @@ class LoginViewController: GradientViewController {
         addActions()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        emailTextField.text = ""
+        passwordTextField.text = ""
+    }
+    
     private func createViews() {
         appNameLabel = UILabel()
         view.addSubview(appNameLabel)
@@ -123,7 +128,7 @@ class LoginViewController: GradientViewController {
         let loginResult = dataService.login(email: emailTextField.text!, password: passwordTextField.text!)
         
         if case LoginStatus.success = loginResult {
-            router.showQuizzesController()
+            router.showTabBarController()
         } else {
             errorLabel.isHidden = false
         }

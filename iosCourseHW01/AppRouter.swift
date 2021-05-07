@@ -10,8 +10,10 @@ protocol AppRouterProtocol {
     func setStartScreen(in window: UIWindow?)
     
     func showLoginController()
+    func showTabBarController()
     func showQuizzesController()
-    func showQuizViewController()
+    func showQuizController(quiz: Quiz)
+    func showQuizResultController(pageController: QuizPageViewController)
 }
 
 class AppRouter: AppRouterProtocol {
@@ -19,19 +21,28 @@ class AppRouter: AppRouterProtocol {
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+        
+        navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController.navigationBar.shadowImage = UIImage()
+        navigationController.navigationBar.isTranslucent = true
     }
     
     func setStartScreen(in window: UIWindow?) {
         let vc = LoginViewController(router: self)
         navigationController.pushViewController(vc, animated: false)
         navigationController.isNavigationBarHidden = true
+        
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
     
     func showLoginController() {
-        let vc = LoginViewController(router: self)
-        navigationController.pushViewController(vc, animated: true)
+        navigationController.popToRootViewController(animated: true)
+    }
+    
+    func showTabBarController() {
+        let tabBarController = CustomTabBarController(router: self)
+        navigationController.pushViewController(tabBarController, animated: true)
     }
     
     func showQuizzesController() {
@@ -39,8 +50,13 @@ class AppRouter: AppRouterProtocol {
         navigationController.pushViewController(vc, animated: true)
     }
     
-    func showQuizViewController() {
-        let vc = QuizViewController(router: self)
+    func showQuizController(quiz: Quiz) {
+        let vc = QuizPageViewController(router: self, quiz: quiz)
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func showQuizResultController(pageController: QuizPageViewController) {
+        let vc = QuizResultViewController(router: self, pageController: pageController)
         navigationController.pushViewController(vc, animated: true)
     }
     
