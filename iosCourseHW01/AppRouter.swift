@@ -17,7 +17,8 @@ protocol AppRouterProtocol {
 }
 
 class AppRouter: AppRouterProtocol {
-    private let navigationController: UINavigationController!
+    
+    private let navigationController: UINavigationController
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -37,17 +38,17 @@ class AppRouter: AppRouterProtocol {
     }
     
     func showLoginController() {
-        navigationController.popToRootViewController(animated: true)
+        let vc = LoginViewController(router: self)
+        navigationController.setViewControllers([vc], animated: true)
     }
     
     func showTabBarController() {
         let tabBarController = CustomTabBarController(router: self)
-        navigationController.pushViewController(tabBarController, animated: true)
+        navigationController.setViewControllers([tabBarController], animated: true)
     }
     
     func showQuizzesController() {
-        let vc = QuizzesViewController(router: self)
-        navigationController.pushViewController(vc, animated: true)
+        navigationController.popToRootViewController(animated: true)
     }
     
     func showQuizController(quiz: Quiz) {

@@ -18,7 +18,8 @@ class LoginViewController: GradientViewController {
     private var loginButton: UIButton!
     private var errorLabel: UILabel!
     
-    private var dataService = DataService()
+    // private var dataService = DataService()
+    private var networkService = NetworkService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,12 +126,12 @@ class LoginViewController: GradientViewController {
     
     @objc
     private func login() {
-        let loginResult = dataService.login(email: emailTextField.text!, password: passwordTextField.text!)
-        
-        if case LoginStatus.success = loginResult {
-            router.showTabBarController()
-        } else {
-            errorLabel.isHidden = false
+        networkService.login(email: emailTextField.text!, password: passwordTextField.text!) { loginStatus in
+            if case LoginStatus.success = loginStatus {
+                self.router.showTabBarController()
+            } else {
+                self.errorLabel.isHidden = false
+            }
         }
     }
     

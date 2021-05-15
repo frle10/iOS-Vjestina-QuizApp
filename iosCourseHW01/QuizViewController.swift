@@ -154,6 +154,7 @@ class QuizViewController: GradientViewController {
             if currentQuestion < questionCount - 1 {
                 self.pageController.nextQuestion()
             } else {
+                self.pageController.quizEnded()
                 self.router.showQuizResultController(pageController: self.pageController)
             }
         }

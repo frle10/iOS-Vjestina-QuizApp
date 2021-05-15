@@ -10,6 +10,17 @@
 		387CF72E04F8D7F2913B6F3E /* Pods_iosCourseHW01.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 225B8CBE86778DB066447047 /* Pods_iosCourseHW01.framework */; };
 		ED08D23C262736D7008AC25D /* TextFieldWithPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED08D23B262736D7008AC25D /* TextFieldWithPadding.swift */; };
 		ED2ECFA826419BAF00570060 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2ECFA726419BAF00570060 /* UIColorExtensions.swift */; };
+		ED7CD3F1264E91BF00EE3C2D /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7CD3F0264E91BF00EE3C2D /* NetworkService.swift */; };
+		ED7CD3F3264E91DE00EE3C2D /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7CD3F2264E91DE00EE3C2D /* NetworkServiceProtocol.swift */; };
+		ED7CD3F5264FD97D00EE3C2D /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7CD3F4264FD97D00EE3C2D /* RequestError.swift */; };
+		ED7CD3F7264FDD2D00EE3C2D /* LeaderboardResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7CD3F6264FDD2D00EE3C2D /* LeaderboardResult.swift */; };
+		ED7CD3F92650252C00EE3C2D /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7CD3F82650252C00EE3C2D /* Result.swift */; };
+		ED7CD3FB2650265A00EE3C2D /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7CD3FA2650265A00EE3C2D /* LoginResponse.swift */; };
+		ED7CD3FD265039AF00EE3C2D /* QuizzesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7CD3FC265039AF00EE3C2D /* QuizzesResponse.swift */; };
+		ED7CD3FF2650444300EE3C2D /* QuizResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7CD3FE2650444300EE3C2D /* QuizResult.swift */; };
+		ED7CD40126504E2E00EE3C2D /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7CD40026504E2E00EE3C2D /* LeaderboardViewController.swift */; };
+		ED7CD40326506B8C00EE3C2D /* LeaderboardCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7CD40226506B8C00EE3C2D /* LeaderboardCard.swift */; };
+		ED7CD40526506C5C00EE3C2D /* SourceSansPro-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED7CD40426506C5C00EE3C2D /* SourceSansPro-Black.ttf */; };
 		EDBAF2FC262746230036B977 /* QuizzesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBAF2FB262746230036B977 /* QuizzesViewController.swift */; };
 		EDBAF2FF262762230036B977 /* QuizCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBAF2FE262762230036B977 /* QuizCard.swift */; };
 		EDCA4374262740E80009E250 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCA436D262740E80009E250 /* DataService.swift */; };
@@ -43,6 +54,17 @@
 		D345DDD1A7A1EB8CA01B30EB /* Pods-iosCourseHW01.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosCourseHW01.release.xcconfig"; path = "Target Support Files/Pods-iosCourseHW01/Pods-iosCourseHW01.release.xcconfig"; sourceTree = "<group>"; };
 		ED08D23B262736D7008AC25D /* TextFieldWithPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithPadding.swift; sourceTree = "<group>"; };
 		ED2ECFA726419BAF00570060 /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		ED7CD3F0264E91BF00EE3C2D /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		ED7CD3F2264E91DE00EE3C2D /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
+		ED7CD3F4264FD97D00EE3C2D /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
+		ED7CD3F6264FDD2D00EE3C2D /* LeaderboardResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardResult.swift; sourceTree = "<group>"; };
+		ED7CD3F82650252C00EE3C2D /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		ED7CD3FA2650265A00EE3C2D /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
+		ED7CD3FC265039AF00EE3C2D /* QuizzesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzesResponse.swift; sourceTree = "<group>"; };
+		ED7CD3FE2650444300EE3C2D /* QuizResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResult.swift; sourceTree = "<group>"; };
+		ED7CD40026504E2E00EE3C2D /* LeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
+		ED7CD40226506B8C00EE3C2D /* LeaderboardCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardCard.swift; sourceTree = "<group>"; };
+		ED7CD40426506C5C00EE3C2D /* SourceSansPro-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Black.ttf"; sourceTree = "<group>"; };
 		EDBAF2FB262746230036B977 /* QuizzesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzesViewController.swift; sourceTree = "<group>"; };
 		EDBAF2FE262762230036B977 /* QuizCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizCard.swift; sourceTree = "<group>"; };
 		EDCA436D262740E80009E250 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
@@ -99,6 +121,8 @@
 				EDCA436D262740E80009E250 /* DataService.swift */,
 				EDCA436E262740E80009E250 /* Models */,
 				EDCA4373262740E80009E250 /* DataServiceProtocol.swift */,
+				ED7CD3F0264E91BF00EE3C2D /* NetworkService.swift */,
+				ED7CD3F2264E91DE00EE3C2D /* NetworkServiceProtocol.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -110,6 +134,12 @@
 				EDCA4370262740E80009E250 /* Question.swift */,
 				EDCA4371262740E80009E250 /* LoginStatus.swift */,
 				EDCA4372262740E80009E250 /* Quiz.swift */,
+				ED7CD3F4264FD97D00EE3C2D /* RequestError.swift */,
+				ED7CD3F6264FDD2D00EE3C2D /* LeaderboardResult.swift */,
+				ED7CD3F82650252C00EE3C2D /* Result.swift */,
+				ED7CD3FA2650265A00EE3C2D /* LoginResponse.swift */,
+				ED7CD3FC265039AF00EE3C2D /* QuizzesResponse.swift */,
+				ED7CD3FE2650444300EE3C2D /* QuizResult.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -117,6 +147,7 @@
 		EDCC567926443EF8007F969D /* fonts */ = {
 			isa = PBXGroup;
 			children = (
+				ED7CD40426506C5C00EE3C2D /* SourceSansPro-Black.ttf */,
 				EDCC567A2644404A007F969D /* SourceSansPro-Bold.ttf */,
 				EDCC567B2644404A007F969D /* SourceSansPro-Regular.ttf */,
 				EDCC567C2644404A007F969D /* SourceSansPro-SemiBold.ttf */,
@@ -166,6 +197,8 @@
 				EDCC568A264597D8007F969D /* QuizResultViewController.swift */,
 				EDCC568C26459E14007F969D /* SettingsViewController.swift */,
 				EDCC568E2645A8EE007F969D /* CustomTabBarController.swift */,
+				ED7CD40026504E2E00EE3C2D /* LeaderboardViewController.swift */,
+				ED7CD40226506B8C00EE3C2D /* LeaderboardCard.swift */,
 			);
 			path = iosCourseHW01;
 			sourceTree = "<group>";
@@ -241,6 +274,7 @@
 				EDEE22692626E3EC00336B2C /* LaunchScreen.storyboard in Resources */,
 				EDCC567F2644404A007F969D /* SourceSansPro-SemiBold.ttf in Resources */,
 				EDCC567D2644404A007F969D /* SourceSansPro-Bold.ttf in Resources */,
+				ED7CD40526506C5C00EE3C2D /* SourceSansPro-Black.ttf in Resources */,
 				EDCC567E2644404A007F969D /* SourceSansPro-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -294,16 +328,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED7CD3F92650252C00EE3C2D /* Result.swift in Sources */,
 				EDEE226F2626FA1600336B2C /* LoginViewController.swift in Sources */,
 				EDCC568526448947007F969D /* QuizViewController.swift in Sources */,
+				ED7CD3F1264E91BF00EE3C2D /* NetworkService.swift in Sources */,
 				EDCC568F2645A8EE007F969D /* CustomTabBarController.swift in Sources */,
 				EDCC568D26459E14007F969D /* SettingsViewController.swift in Sources */,
+				ED7CD3FB2650265A00EE3C2D /* LoginResponse.swift in Sources */,
 				EDCA4377262740E80009E250 /* LoginStatus.swift in Sources */,
 				ED2ECFA826419BAF00570060 /* UIColorExtensions.swift in Sources */,
+				ED7CD40126504E2E00EE3C2D /* LeaderboardViewController.swift in Sources */,
 				ED08D23C262736D7008AC25D /* TextFieldWithPadding.swift in Sources */,
+				ED7CD3F7264FDD2D00EE3C2D /* LeaderboardResult.swift in Sources */,
+				ED7CD3FF2650444300EE3C2D /* QuizResult.swift in Sources */,
 				EDCC568726453CD5007F969D /* QuestionTrackerView.swift in Sources */,
 				EDCC568326446F9C007F969D /* GradientViewController.swift in Sources */,
 				EDCA4375262740E80009E250 /* QuizCategory.swift in Sources */,
+				ED7CD3F5264FD97D00EE3C2D /* RequestError.swift in Sources */,
 				EDCC56782643E4C6007F969D /* ThemeConstants.swift in Sources */,
 				EDEE224D2626E30C00336B2C /* AppDelegate.swift in Sources */,
 				EDBAF2FC262746230036B977 /* QuizzesViewController.swift in Sources */,
@@ -313,9 +354,12 @@
 				EDEE224F2626E30C00336B2C /* SceneDelegate.swift in Sources */,
 				EDBAF2FF262762230036B977 /* QuizCard.swift in Sources */,
 				EDCC568B264597D8007F969D /* QuizResultViewController.swift in Sources */,
+				ED7CD3F3264E91DE00EE3C2D /* NetworkServiceProtocol.swift in Sources */,
 				EDCA4376262740E80009E250 /* Question.swift in Sources */,
 				EDCA4374262740E80009E250 /* DataService.swift in Sources */,
 				EDCA4378262740E80009E250 /* Quiz.swift in Sources */,
+				ED7CD3FD265039AF00EE3C2D /* QuizzesResponse.swift in Sources */,
+				ED7CD40326506B8C00EE3C2D /* LeaderboardCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,7 +417,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -428,7 +472,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

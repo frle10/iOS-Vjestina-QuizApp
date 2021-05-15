@@ -13,6 +13,10 @@ class QuizPageViewController: UIPageViewController {
     private var answers: [Bool?] = []
     
     private var displayedIndex = 0
+    
+    private var startTime: DispatchTime!
+    private var endTime: DispatchTime!
+    
     private var quiz: Quiz!
     
     convenience init(router: AppRouterProtocol, quiz: Quiz) {
@@ -34,6 +38,11 @@ class QuizPageViewController: UIPageViewController {
         guard let firstVC = controllers.first else { return }
         
         setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
+        startTime = DispatchTime.now()
+    }
+    
+    func getQuizId() -> Int {
+        return quiz.id
     }
     
     func getNumberOfQuestions() -> Int {
@@ -59,6 +68,14 @@ class QuizPageViewController: UIPageViewController {
     
     func setAnswer(correct: Bool) {
         answers[displayedIndex] = correct
+    }
+    
+    func quizEnded() {
+        endTime = DispatchTime.now()
+    }
+    
+    func getElapsedTime() -> Double {
+        return Double(endTime.uptimeNanoseconds - startTime.uptimeNanoseconds) / 1_000_000_000
     }
     
 }

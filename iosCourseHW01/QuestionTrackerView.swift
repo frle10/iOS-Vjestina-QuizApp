@@ -58,7 +58,7 @@ class QuestionTrackerView: UIView {
             rect.layer.cornerRadius = 3
             
             rect.snp.makeConstraints { make -> Void in
-                make.width.equalTo(40)
+                make.width.equalTo(20)
                 make.height.equalTo(6)
             }
             

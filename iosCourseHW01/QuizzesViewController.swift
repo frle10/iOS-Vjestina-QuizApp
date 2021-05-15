@@ -23,7 +23,7 @@ class QuizzesViewController: GradientViewController {
     private var nbaCountLabel: UILabel!
     private var quizTable: UITableView!
     
-    private var dataService: DataService = DataService()
+    private var networkService: NetworkService = NetworkService()
     private var quizzes: [Quiz] = []
     private var categories: [QuizCategory] = []
     
@@ -142,20 +142,26 @@ class QuizzesViewController: GradientViewController {
     
     @objc
     private func getQuizzes() {
-        quizzes = dataService.fetchQuizes()
-        categories = Array(Set(quizzes.map { $0.category })).sorted { $0.rawValue > $1.rawValue }
+        let defaults = UserDefaults.standard
+        let token = defaults.string(forKey: "token")
         
-        let nbaCount = quizzes.map { $0.questions.filter { $0.question.contains("NBA") } }
-            .map { $0.count }
-            .reduce(0, { $0 + $1 })
-        
-        nbaCountLabel.text = "There are \(nbaCount) questions that contain the word \"NBA\""
-        nbaCountLabel.isHidden = false
-        
-        funFactLabel.isHidden = false
-        
-        quizTable.reloadData()
-        quizTable.isHidden = false
+        networkService.fetchQuizzes(token: token!) { quizzes in
+            self.quizzes = quizzes
+            
+            self.categories = Array(Set(quizzes.map { $0.category })).sorted { $0.rawValue > $1.rawValue }
+            
+            let nbaCount = quizzes.map { $0.questions.filter { $0.question.contains("NBA") } }
+                .map { $0.count }
+                .reduce(0, { $0 + $1 })
+            
+            self.nbaCountLabel.text = "There are \(nbaCount) questions that contain the word \"NBA\""
+            self.nbaCountLabel.isHidden = false
+            
+            self.funFactLabel.isHidden = false
+            
+            self.quizTable.reloadData()
+            self.quizTable.isHidden = false
+        }
     }
     
 }
