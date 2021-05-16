@@ -24,6 +24,8 @@ class QuizzesViewController: GradientViewController, QuizzesViewDelegate {
     private var nbaCountLabel: UILabel!
     private var quizTable: UITableView!
     
+    private var errorLabel: UILabel!
+    
     private let quizzesPresenter = QuizzesPresenter(networkService: NetworkService())
     
     override func viewDidLoad() {
@@ -62,6 +64,9 @@ class QuizzesViewController: GradientViewController, QuizzesViewDelegate {
         nbaCountLabel = UILabel()
         quizzesView.addSubview(nbaCountLabel)
         
+        errorLabel = UILabel()
+        quizzesView.addSubview(errorLabel)
+        
         quizTable = UITableView()
         quizzesView.addSubview(quizTable)
         
@@ -91,6 +96,11 @@ class QuizzesViewController: GradientViewController, QuizzesViewDelegate {
         nbaCountLabel.textColor = .white
         nbaCountLabel.font = UIFont(name: "SourceSansPro-SemiBold", size: 18)
         nbaCountLabel.numberOfLines = 0
+        
+        errorLabel.text = "Data can't be reached."
+        errorLabel.textColor = .white
+        errorLabel.font = UIFont(name: "SourceSansPro-Regular", size: 16)
+        errorLabel.isHidden = true
         
         quizTable.backgroundColor = .clear
         quizTable.rowHeight = 150
@@ -130,6 +140,10 @@ class QuizzesViewController: GradientViewController, QuizzesViewDelegate {
             make.left.right.equalToSuperview()
         }
         
+        errorLabel.snp.makeConstraints { make -> Void in
+            make.center.equalToSuperview()
+        }
+        
         quizTable.snp.makeConstraints { make -> Void in
             make.top.equalTo(nbaCountLabel.snp.bottom).offset(20)
             make.left.right.equalToSuperview()
@@ -141,7 +155,17 @@ class QuizzesViewController: GradientViewController, QuizzesViewDelegate {
         getQuizButton.addTarget(self, action: #selector(getQuizzes), for: .touchUpInside)
     }
     
+    func showErrorLabel() {
+        funFactLabel.isHidden = true
+        nbaCountLabel.isHidden = true
+        quizTable.isHidden = true
+        
+        errorLabel.isHidden = false
+    }
+    
     func updateTableData() {
+        errorLabel.isHidden = true
+        
         self.nbaCountLabel.text = "There are \(quizzesPresenter.getNbaCount()) questions that contain the word \"NBA\""
         self.nbaCountLabel.isHidden = false
         

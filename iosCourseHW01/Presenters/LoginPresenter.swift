@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import Network
 
 protocol LoginViewDelegate: NSObjectProtocol {
-    func updateErrorLabel()
+    func updateErrorLabel(text: String)
     func goToTabBarController()
 }
 
@@ -26,12 +27,19 @@ class LoginPresenter {
     }
     
     func login(username: String, password: String) {
-        networkService.login(email: username, password: password) { loginStatus in
-            if case LoginStatus.success = loginStatus {
-                self.loginViewDelegate?.goToTabBarController()
-            } else {
-                self.loginViewDelegate?.updateErrorLabel()
+        let netConnection = NetMonitor.shared
+        let status = netConnection.netOn
+        
+        if status {
+            networkService.login(email: username, password: password) { loginStatus in
+                if case LoginStatus.success = loginStatus {
+                    self.loginViewDelegate?.goToTabBarController()
+                } else {
+                    self.loginViewDelegate?.updateErrorLabel(text: "Login unsuccessful.")
+                }
             }
+        } else {
+            self.loginViewDelegate?.updateErrorLabel(text: "No internet.")
         }
     }
     

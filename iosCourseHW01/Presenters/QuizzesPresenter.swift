@@ -9,6 +9,7 @@ import Foundation
 
 protocol QuizzesViewDelegate: NSObjectProtocol {
     func updateTableData()
+    func showErrorLabel()
 }
 
 class QuizzesPresenter {
@@ -32,16 +33,23 @@ class QuizzesPresenter {
         let defaults = UserDefaults.standard
         let token = defaults.string(forKey: "token")
         
-        networkService.fetchQuizzes(token: token!) { quizzes in
-            self.quizzes = quizzes
-            
-            self.categories = Array(Set(quizzes.map { $0.category })).sorted { $0.rawValue > $1.rawValue }
-            
-            self.nbaCount = quizzes.map { $0.questions.filter { $0.question.contains("NBA") } }
-                .map { $0.count }
-                .reduce(0, { $0 + $1 })
-            
-            self.quizzesViewDelegate?.updateTableData()
+        let netConnection = NetMonitor.shared
+        let status = netConnection.netOn
+        
+        if status {
+            networkService.fetchQuizzes(token: token!) { quizzes in
+                self.quizzes = quizzes
+                
+                self.categories = Array(Set(quizzes.map { $0.category })).sorted { $0.rawValue > $1.rawValue }
+                
+                self.nbaCount = quizzes.map { $0.questions.filter { $0.question.contains("NBA") } }
+                    .map { $0.count }
+                    .reduce(0, { $0 + $1 })
+                
+                self.quizzesViewDelegate?.updateTableData()
+            }
+        } else {
+            quizzesViewDelegate?.showErrorLabel()
         }
     }
     

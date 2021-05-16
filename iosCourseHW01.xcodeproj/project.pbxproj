@@ -16,6 +16,7 @@
 		ED748D5C265181AD00936335 /* QuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED748D5B265181AD00936335 /* QuizPresenter.swift */; };
 		ED748D5E26518BA000936335 /* QuestionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED748D5D26518BA000936335 /* QuestionPresenter.swift */; };
 		ED748D602651936000936335 /* QuizResultPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED748D5F2651936000936335 /* QuizResultPresenter.swift */; };
+		ED748D6226519D1500936335 /* NetMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED748D6126519D1500936335 /* NetMonitor.swift */; };
 		ED7CD3F1264E91BF00EE3C2D /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7CD3F0264E91BF00EE3C2D /* NetworkService.swift */; };
 		ED7CD3F3264E91DE00EE3C2D /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7CD3F2264E91DE00EE3C2D /* NetworkServiceProtocol.swift */; };
 		ED7CD3F5264FD97D00EE3C2D /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7CD3F4264FD97D00EE3C2D /* RequestError.swift */; };
@@ -65,6 +66,7 @@
 		ED748D5B265181AD00936335 /* QuizPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizPresenter.swift; sourceTree = "<group>"; };
 		ED748D5D26518BA000936335 /* QuestionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPresenter.swift; sourceTree = "<group>"; };
 		ED748D5F2651936000936335 /* QuizResultPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultPresenter.swift; sourceTree = "<group>"; };
+		ED748D6126519D1500936335 /* NetMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetMonitor.swift; sourceTree = "<group>"; };
 		ED7CD3F0264E91BF00EE3C2D /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		ED7CD3F2264E91DE00EE3C2D /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
 		ED7CD3F4264FD97D00EE3C2D /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				EDEE22682626E3EC00336B2C /* LaunchScreen.storyboard */,
 				ED2ECFA726419BAF00570060 /* UIColorExtensions.swift */,
 				EDCC568026446F2D007F969D /* AppRouter.swift */,
+				ED748D6126519D1500936335 /* NetMonitor.swift */,
 			);
 			path = iosCourseHW01;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				ED7CD3F92650252C00EE3C2D /* Result.swift in Sources */,
 				EDEE226F2626FA1600336B2C /* LoginViewController.swift in Sources */,
 				EDCC568526448947007F969D /* QuizViewController.swift in Sources */,
+				ED748D6226519D1500936335 /* NetMonitor.swift in Sources */,
 				ED7CD3F1264E91BF00EE3C2D /* NetworkService.swift in Sources */,
 				EDCC568F2645A8EE007F969D /* CustomTabBarController.swift in Sources */,
 				EDCC568D26459E14007F969D /* SettingsViewController.swift in Sources */,

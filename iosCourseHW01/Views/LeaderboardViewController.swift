@@ -15,6 +15,8 @@ class LeaderboardViewController: GradientViewController, LeaderboardViewDelegate
     private var leaderboardLabel: UILabel!
     private var closeButton: UIButton!
     
+    private var errorLabel: UILabel!
+    
     private var leaderboardTable: UITableView!
     
     private let leaderboardPresenter = LeaderboardPresenter(networkService: NetworkService())
@@ -44,6 +46,9 @@ class LeaderboardViewController: GradientViewController, LeaderboardViewDelegate
         closeButton = UIButton()
         view.addSubview(closeButton)
         
+        errorLabel = UILabel()
+        view.addSubview(errorLabel)
+        
         leaderboardTable = UITableView()
         view.addSubview(leaderboardTable)
         
@@ -56,6 +61,10 @@ class LeaderboardViewController: GradientViewController, LeaderboardViewDelegate
         leaderboardLabel.text = "Leaderboard"
         leaderboardLabel.textColor = .white
         leaderboardLabel.font = UIFont(name: "SourceSansPro-Bold", size: 24)
+        
+        errorLabel.text = "Could not fetch leaderboard data."
+        errorLabel.font = UIFont(name: "SourceSansPro-Regular", size: 16)
+        errorLabel.textColor = .white
         
         closeButton.setBackgroundImage(UIImage(named: "close-button"), for: .normal)
         
@@ -78,6 +87,10 @@ class LeaderboardViewController: GradientViewController, LeaderboardViewDelegate
             make.right.equalToSuperview().inset(30)
         }
         
+        errorLabel.snp.makeConstraints { make -> Void in
+            make.center.equalToSuperview()
+        }
+        
         leaderboardTable.snp.makeConstraints { make -> Void in
             make.top.equalTo(leaderboardLabel.snp.bottom).offset(50)
             make.left.right.equalToSuperview()
@@ -90,13 +103,19 @@ class LeaderboardViewController: GradientViewController, LeaderboardViewDelegate
     }
     
     func updateTableData() {
-        self.leaderboardTable.reloadData()
-        self.leaderboardTable.isHidden = false
+        errorLabel.isHidden = true
+        leaderboardTable.reloadData()
+        leaderboardTable.isHidden = false
+    }
+    
+    func showErrorLabel() {
+        leaderboardTable.isHidden = true
+        errorLabel.isHidden = false
     }
     
     @objc
     func dismissLeaderboard() {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
 }

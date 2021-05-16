@@ -58,8 +58,13 @@ class QuizResultPresenter {
         
         self.correctAnswers = correctCount
         
-        let quizResult = QuizResult(userId: userId, quizId: quizId, time: time, correctAnswers: self.correctAnswers)
-        networkService.sendQuizResult(token: token!, quizResult: quizResult)
+        let netConnection = NetMonitor.shared
+        let status = netConnection.netOn
+        
+        if status {
+            let quizResult = QuizResult(userId: userId, quizId: quizId, time: time, correctAnswers: self.correctAnswers)
+            networkService.sendQuizResult(token: token!, quizResult: quizResult)
+        }
     }
     
 }

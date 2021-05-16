@@ -9,6 +9,7 @@ import Foundation
 
 protocol LeaderboardViewDelegate: NSObjectProtocol {
     func updateTableData()
+    func showErrorLabel()
 }
 
 class LeaderboardPresenter {
@@ -47,9 +48,16 @@ class LeaderboardPresenter {
         let defaults = UserDefaults.standard
         let token = defaults.string(forKey: "token")
         
-        networkService.fetchLeaderboardForQuiz(token: token!, quizId: quizId!) { leaderboardResults in
-            self.leaderboardResults = leaderboardResults
-            self.leaderboardViewDelegate?.updateTableData()
+        let netConnection = NetMonitor.shared
+        let status = netConnection.netOn
+        
+        if status {
+            networkService.fetchLeaderboardForQuiz(token: token!, quizId: quizId!) { leaderboardResults in
+                self.leaderboardResults = leaderboardResults
+                self.leaderboardViewDelegate?.updateTableData()
+            }
+        } else {
+            leaderboardViewDelegate?.showErrorLabel()
         }
     }
 

@@ -76,7 +76,6 @@ class LoginViewController: GradientViewController, LoginViewDelegate {
         loginButton.titleLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 16)
         loginButton.isEnabled = false
         
-        errorLabel.text = "Login unsuccessful."
         errorLabel.font = UIFont(name: "SourceSansPro-Regular", size: 14)
         errorLabel.textColor = .white
         errorLabel.isHidden = true
@@ -118,7 +117,8 @@ class LoginViewController: GradientViewController, LoginViewDelegate {
         loginButton.addTarget(self, action: #selector(login), for: .touchUpInside)
     }
     
-    func updateErrorLabel() {
+    func updateErrorLabel(text: String) {
+        self.errorLabel.text = text
         self.errorLabel.isHidden = false
     }
     
