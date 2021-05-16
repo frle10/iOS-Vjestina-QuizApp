@@ -4,11 +4,12 @@
 //
 //  Created by Ivan Skorupan on 14.04.2021..
 //
+
 import Foundation
 import SnapKit
 import UIKit
 
-class QuizzesViewController: GradientViewController {
+class QuizzesViewController: GradientViewController, QuizzesViewDelegate {
     
     private let CORNER_RADIUS: CGFloat = 10
     
@@ -23,9 +24,7 @@ class QuizzesViewController: GradientViewController {
     private var nbaCountLabel: UILabel!
     private var quizTable: UITableView!
     
-    private var networkService: NetworkService = NetworkService()
-    private var quizzes: [Quiz] = []
-    private var categories: [QuizCategory] = []
+    private let quizzesPresenter = QuizzesPresenter(networkService: NetworkService())
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +35,8 @@ class QuizzesViewController: GradientViewController {
         styleViews()
         createConstraints()
         addActions()
+        
+        quizzesPresenter.setViewDelegate(quizzesViewDelegate: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -140,28 +141,19 @@ class QuizzesViewController: GradientViewController {
         getQuizButton.addTarget(self, action: #selector(getQuizzes), for: .touchUpInside)
     }
     
+    func updateTableData() {
+        self.nbaCountLabel.text = "There are \(quizzesPresenter.getNbaCount()) questions that contain the word \"NBA\""
+        self.nbaCountLabel.isHidden = false
+        
+        self.funFactLabel.isHidden = false
+        
+        self.quizTable.reloadData()
+        self.quizTable.isHidden = false
+    }
+    
     @objc
     private func getQuizzes() {
-        let defaults = UserDefaults.standard
-        let token = defaults.string(forKey: "token")
-        
-        networkService.fetchQuizzes(token: token!) { quizzes in
-            self.quizzes = quizzes
-            
-            self.categories = Array(Set(quizzes.map { $0.category })).sorted { $0.rawValue > $1.rawValue }
-            
-            let nbaCount = quizzes.map { $0.questions.filter { $0.question.contains("NBA") } }
-                .map { $0.count }
-                .reduce(0, { $0 + $1 })
-            
-            self.nbaCountLabel.text = "There are \(nbaCount) questions that contain the word \"NBA\""
-            self.nbaCountLabel.isHidden = false
-            
-            self.funFactLabel.isHidden = false
-            
-            self.quizTable.reloadData()
-            self.quizTable.isHidden = false
-        }
+        quizzesPresenter.fetchQuizzes()
     }
     
 }
@@ -169,18 +161,17 @@ class QuizzesViewController: GradientViewController {
 extension QuizzesViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return categories.count
+        return quizzesPresenter.getCategories().count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return quizzes.map { $0.category }.filter { $0 == categories[section] }.count
+        return quizzesPresenter.numberOfRowsInSection(section: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: QuizCard = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! QuizCard
         
-        let quizzesInSection: [Quiz] = quizzes.filter { $0.category == categories[indexPath.section] }
-        let currentQuiz: Quiz = quizzesInSection[indexPath.row]
+        let currentQuiz: Quiz = quizzesPresenter.getCurrentQuiz(section: indexPath.section, row: indexPath.row)
         
         cell.title.text = currentQuiz.title
         cell.desc.text = currentQuiz.description
@@ -195,7 +186,7 @@ extension QuizzesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UILabel()
         headerView.textColor = UIColor(hex: "#F2C94CFF")
-        headerView.text = categories[section].rawValue
+        headerView.text = quizzesPresenter.getCategories()[section].rawValue
         headerView.font = UIFont(name: "SourceSansPro-Bold", size: 20)
         
         return headerView
@@ -208,9 +199,7 @@ extension QuizzesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let quizzesInSection: [Quiz] = quizzes.filter { $0.category == categories[indexPath.section] }
-        let currentQuiz: Quiz = quizzesInSection[indexPath.row]
-        
+        let currentQuiz: Quiz = quizzesPresenter.getCurrentQuiz(section: indexPath.section, row: indexPath.row)
         router.showQuizController(quiz: currentQuiz)
     }
     

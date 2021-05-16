@@ -12,40 +12,17 @@ class QuizResultViewController: GradientViewController {
     
     private let CORNER_RADIUS: CGFloat = 10
     
-    private var pageController: QuizPageViewController!
-    
     private var resultLabel: UILabel!
     private var seeLeaderboardButton: UIButton!
     private var finishQuizButton: UIButton!
     
-    private var correctAnswers: Int = 0
+    private let quizResultPresenter = QuizResultPresenter(networkService: NetworkService())
     
-    private var networkService: NetworkService = NetworkService()
-    
-    convenience init(router: AppRouterProtocol, pageController: QuizPageViewController) {
+    convenience init(router: AppRouterProtocol, quizPresenter: QuizPresenter) {
         self.init(router: router)
-        self.pageController = pageController
+        quizResultPresenter.setQuizPresenter(quizPresenter: quizPresenter)
         
-        let defaults = UserDefaults.standard
-        let token = defaults.string(forKey: "token")
-        let userId = defaults.integer(forKey: "userId")
-        
-        let quizId = pageController.getQuizId()
-        let time = pageController.getElapsedTime()
-        
-        let answers = pageController.getAnswers()
-        var correctCount = 0
-        
-        for answer in answers {
-            if answer == true {
-                correctCount += 1
-            }
-        }
-        
-        self.correctAnswers = correctCount
-        
-        let quizResult = QuizResult(userId: userId, quizId: quizId, time: time, correctAnswers: self.correctAnswers)
-        networkService.sendQuizResult(token: token!, quizResult: quizResult)
+        quizResultPresenter.sendQuizResult()
     }
     
     override func viewDidLoad() {
@@ -76,7 +53,7 @@ class QuizResultViewController: GradientViewController {
         resultLabel.textColor = .white
         resultLabel.font = UIFont(name: "SourceSansPro-Bold", size: 88)
         
-        resultLabel.text = "\(self.correctAnswers)/\(pageController.getAnswers().count)"
+        resultLabel.text = "\(quizResultPresenter.getCorrectAnswers())/\(quizResultPresenter.getQuizPresenter().getAnswers().count)"
         
         seeLeaderboardButton.backgroundColor = .white
         seeLeaderboardButton.setTitle("See Leaderboard", for: .normal)
@@ -118,7 +95,7 @@ class QuizResultViewController: GradientViewController {
     
     @objc
     private func showLeaderboard() {
-        let vc = LeaderboardViewController(quizId: pageController.getQuizId())
+        let vc = LeaderboardViewController(quizId: quizResultPresenter.getQuizPresenter().getQuizId())
         self.navigationController?.present(vc, animated: true, completion: nil)
     }
     

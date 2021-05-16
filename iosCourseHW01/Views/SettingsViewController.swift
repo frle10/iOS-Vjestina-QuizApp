@@ -2,7 +2,7 @@
 //  SettingsViewController.swift
 //  iosCourseHW01
 //
-//  Created by SofaScore Akademija on 07.05.2021..
+//  Created by Ivan Skorupan on 07.05.2021..
 //
 
 import Foundation

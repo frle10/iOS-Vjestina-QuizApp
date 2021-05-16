@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class LeaderboardViewController: GradientViewController {
+class LeaderboardViewController: GradientViewController, LeaderboardViewDelegate {
     
     let cellIdentifier = "cellId2"
     
@@ -17,14 +17,11 @@ class LeaderboardViewController: GradientViewController {
     
     private var leaderboardTable: UITableView!
     
-    private var leaderboardResults: [LeaderboardResult] = []
-    private var quizId: Int!
-    
-    private var networkService: NetworkService = NetworkService()
+    private let leaderboardPresenter = LeaderboardPresenter(networkService: NetworkService())
     
     convenience init(quizId: Int) {
         self.init()
-        self.quizId = quizId
+        leaderboardPresenter.setQuizId(quizId: quizId)
     }
     
     override func viewDidLoad() {
@@ -35,14 +32,9 @@ class LeaderboardViewController: GradientViewController {
         createConstraints()
         addActions()
         
-        let defaults = UserDefaults.standard
-        let token = defaults.string(forKey: "token")
+        leaderboardPresenter.setViewDelegate(leaderboardViewDelegate: self)
         
-        networkService.fetchLeaderboardForQuiz(token: token!, quizId: quizId) { leaderboardResults in
-            self.leaderboardResults = leaderboardResults
-            self.leaderboardTable.reloadData()
-            self.leaderboardTable.isHidden = false
-        }
+        leaderboardPresenter.fetchLeaderboardForQuiz()
     }
     
     func createViews() {
@@ -97,6 +89,11 @@ class LeaderboardViewController: GradientViewController {
         closeButton.addTarget(self, action: #selector(dismissLeaderboard), for: .touchUpInside)
     }
     
+    func updateTableData() {
+        self.leaderboardTable.reloadData()
+        self.leaderboardTable.isHidden = false
+    }
+    
     @objc
     func dismissLeaderboard() {
         self.dismiss(animated: true, completion: nil)
@@ -111,13 +108,13 @@ extension LeaderboardViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return leaderboardResults.count
+        return leaderboardPresenter.getLeaderboardResults().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: LeaderboardCard = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! LeaderboardCard
         
-        let currentResult: LeaderboardResult = leaderboardResults[indexPath.row]
+        let currentResult = leaderboardPresenter.getCurrentResult(row: indexPath.row)
         
         cell.order.text = "\(indexPath.row + 1)."
         cell.username.text = currentResult.username

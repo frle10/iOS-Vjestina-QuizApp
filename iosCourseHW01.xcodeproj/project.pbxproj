@@ -10,6 +10,12 @@
 		387CF72E04F8D7F2913B6F3E /* Pods_iosCourseHW01.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 225B8CBE86778DB066447047 /* Pods_iosCourseHW01.framework */; };
 		ED08D23C262736D7008AC25D /* TextFieldWithPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED08D23B262736D7008AC25D /* TextFieldWithPadding.swift */; };
 		ED2ECFA826419BAF00570060 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2ECFA726419BAF00570060 /* UIColorExtensions.swift */; };
+		ED748D5626516AF700936335 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED748D5526516AF700936335 /* LoginPresenter.swift */; };
+		ED748D5826516FC600936335 /* QuizzesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED748D5726516FC600936335 /* QuizzesPresenter.swift */; };
+		ED748D5A26517EC600936335 /* LeaderboardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED748D5926517EC600936335 /* LeaderboardPresenter.swift */; };
+		ED748D5C265181AD00936335 /* QuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED748D5B265181AD00936335 /* QuizPresenter.swift */; };
+		ED748D5E26518BA000936335 /* QuestionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED748D5D26518BA000936335 /* QuestionPresenter.swift */; };
+		ED748D602651936000936335 /* QuizResultPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED748D5F2651936000936335 /* QuizResultPresenter.swift */; };
 		ED7CD3F1264E91BF00EE3C2D /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7CD3F0264E91BF00EE3C2D /* NetworkService.swift */; };
 		ED7CD3F3264E91DE00EE3C2D /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7CD3F2264E91DE00EE3C2D /* NetworkServiceProtocol.swift */; };
 		ED7CD3F5264FD97D00EE3C2D /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7CD3F4264FD97D00EE3C2D /* RequestError.swift */; };
@@ -29,7 +35,6 @@
 		EDCA4377262740E80009E250 /* LoginStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCA4371262740E80009E250 /* LoginStatus.swift */; };
 		EDCA4378262740E80009E250 /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCA4372262740E80009E250 /* Quiz.swift */; };
 		EDCA4379262740E80009E250 /* DataServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCA4373262740E80009E250 /* DataServiceProtocol.swift */; };
-		EDCC56782643E4C6007F969D /* ThemeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCC56772643E4C6007F969D /* ThemeConstants.swift */; };
 		EDCC567D2644404A007F969D /* SourceSansPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDCC567A2644404A007F969D /* SourceSansPro-Bold.ttf */; };
 		EDCC567E2644404A007F969D /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDCC567B2644404A007F969D /* SourceSansPro-Regular.ttf */; };
 		EDCC567F2644404A007F969D /* SourceSansPro-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDCC567C2644404A007F969D /* SourceSansPro-SemiBold.ttf */; };
@@ -54,6 +59,12 @@
 		D345DDD1A7A1EB8CA01B30EB /* Pods-iosCourseHW01.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosCourseHW01.release.xcconfig"; path = "Target Support Files/Pods-iosCourseHW01/Pods-iosCourseHW01.release.xcconfig"; sourceTree = "<group>"; };
 		ED08D23B262736D7008AC25D /* TextFieldWithPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithPadding.swift; sourceTree = "<group>"; };
 		ED2ECFA726419BAF00570060 /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		ED748D5526516AF700936335 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		ED748D5726516FC600936335 /* QuizzesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzesPresenter.swift; sourceTree = "<group>"; };
+		ED748D5926517EC600936335 /* LeaderboardPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardPresenter.swift; sourceTree = "<group>"; };
+		ED748D5B265181AD00936335 /* QuizPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizPresenter.swift; sourceTree = "<group>"; };
+		ED748D5D26518BA000936335 /* QuestionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPresenter.swift; sourceTree = "<group>"; };
+		ED748D5F2651936000936335 /* QuizResultPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultPresenter.swift; sourceTree = "<group>"; };
 		ED7CD3F0264E91BF00EE3C2D /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		ED7CD3F2264E91DE00EE3C2D /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
 		ED7CD3F4264FD97D00EE3C2D /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
@@ -73,7 +84,6 @@
 		EDCA4371262740E80009E250 /* LoginStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginStatus.swift; sourceTree = "<group>"; };
 		EDCA4372262740E80009E250 /* Quiz.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
 		EDCA4373262740E80009E250 /* DataServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataServiceProtocol.swift; sourceTree = "<group>"; };
-		EDCC56772643E4C6007F969D /* ThemeConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeConstants.swift; sourceTree = "<group>"; };
 		EDCC567A2644404A007F969D /* SourceSansPro-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Bold.ttf"; sourceTree = "<group>"; };
 		EDCC567B2644404A007F969D /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
 		EDCC567C2644404A007F969D /* SourceSansPro-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -113,6 +123,39 @@
 				D345DDD1A7A1EB8CA01B30EB /* Pods-iosCourseHW01.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		ED748D5326516A5100936335 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EDCC568A264597D8007F969D /* QuizResultViewController.swift */,
+				EDCC568826455BFC007F969D /* QuizPageViewController.swift */,
+				EDCC568626453CD5007F969D /* QuestionTrackerView.swift */,
+				EDCC568C26459E14007F969D /* SettingsViewController.swift */,
+				EDCC568E2645A8EE007F969D /* CustomTabBarController.swift */,
+				EDCC568426448947007F969D /* QuizViewController.swift */,
+				EDCC568226446F9C007F969D /* GradientViewController.swift */,
+				ED7CD40226506B8C00EE3C2D /* LeaderboardCard.swift */,
+				EDBAF2FE262762230036B977 /* QuizCard.swift */,
+				ED7CD40026504E2E00EE3C2D /* LeaderboardViewController.swift */,
+				EDBAF2FB262746230036B977 /* QuizzesViewController.swift */,
+				ED08D23B262736D7008AC25D /* TextFieldWithPadding.swift */,
+				EDEE226E2626FA1600336B2C /* LoginViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		ED748D5426516AC700936335 /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+				ED748D5526516AF700936335 /* LoginPresenter.swift */,
+				ED748D5726516FC600936335 /* QuizzesPresenter.swift */,
+				ED748D5926517EC600936335 /* LeaderboardPresenter.swift */,
+				ED748D5B265181AD00936335 /* QuizPresenter.swift */,
+				ED748D5D26518BA000936335 /* QuestionPresenter.swift */,
+				ED748D5F2651936000936335 /* QuizResultPresenter.swift */,
+			);
+			path = Presenters;
 			sourceTree = "<group>";
 		};
 		EDCA436C262740E80009E250 /* Data */ = {
@@ -176,6 +219,8 @@
 		EDEE224B2626E30C00336B2C /* iosCourseHW01 */ = {
 			isa = PBXGroup;
 			children = (
+				ED748D5426516AC700936335 /* Presenters */,
+				ED748D5326516A5100936335 /* Views */,
 				EDCC567926443EF8007F969D /* fonts */,
 				EDCA436C262740E80009E250 /* Data */,
 				EDEE224C2626E30C00336B2C /* AppDelegate.swift */,
@@ -183,22 +228,8 @@
 				EDEE22552626E30D00336B2C /* Assets.xcassets */,
 				EDEE225A2626E30D00336B2C /* Info.plist */,
 				EDEE22682626E3EC00336B2C /* LaunchScreen.storyboard */,
-				EDEE226E2626FA1600336B2C /* LoginViewController.swift */,
-				ED08D23B262736D7008AC25D /* TextFieldWithPadding.swift */,
-				EDBAF2FB262746230036B977 /* QuizzesViewController.swift */,
-				EDBAF2FE262762230036B977 /* QuizCard.swift */,
 				ED2ECFA726419BAF00570060 /* UIColorExtensions.swift */,
-				EDCC56772643E4C6007F969D /* ThemeConstants.swift */,
 				EDCC568026446F2D007F969D /* AppRouter.swift */,
-				EDCC568226446F9C007F969D /* GradientViewController.swift */,
-				EDCC568426448947007F969D /* QuizViewController.swift */,
-				EDCC568626453CD5007F969D /* QuestionTrackerView.swift */,
-				EDCC568826455BFC007F969D /* QuizPageViewController.swift */,
-				EDCC568A264597D8007F969D /* QuizResultViewController.swift */,
-				EDCC568C26459E14007F969D /* SettingsViewController.swift */,
-				EDCC568E2645A8EE007F969D /* CustomTabBarController.swift */,
-				ED7CD40026504E2E00EE3C2D /* LeaderboardViewController.swift */,
-				ED7CD40226506B8C00EE3C2D /* LeaderboardCard.swift */,
 			);
 			path = iosCourseHW01;
 			sourceTree = "<group>";
@@ -328,6 +359,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED748D5626516AF700936335 /* LoginPresenter.swift in Sources */,
 				ED7CD3F92650252C00EE3C2D /* Result.swift in Sources */,
 				EDEE226F2626FA1600336B2C /* LoginViewController.swift in Sources */,
 				EDCC568526448947007F969D /* QuizViewController.swift in Sources */,
@@ -335,25 +367,29 @@
 				EDCC568F2645A8EE007F969D /* CustomTabBarController.swift in Sources */,
 				EDCC568D26459E14007F969D /* SettingsViewController.swift in Sources */,
 				ED7CD3FB2650265A00EE3C2D /* LoginResponse.swift in Sources */,
+				ED748D602651936000936335 /* QuizResultPresenter.swift in Sources */,
 				EDCA4377262740E80009E250 /* LoginStatus.swift in Sources */,
 				ED2ECFA826419BAF00570060 /* UIColorExtensions.swift in Sources */,
+				ED748D5A26517EC600936335 /* LeaderboardPresenter.swift in Sources */,
 				ED7CD40126504E2E00EE3C2D /* LeaderboardViewController.swift in Sources */,
 				ED08D23C262736D7008AC25D /* TextFieldWithPadding.swift in Sources */,
 				ED7CD3F7264FDD2D00EE3C2D /* LeaderboardResult.swift in Sources */,
 				ED7CD3FF2650444300EE3C2D /* QuizResult.swift in Sources */,
 				EDCC568726453CD5007F969D /* QuestionTrackerView.swift in Sources */,
 				EDCC568326446F9C007F969D /* GradientViewController.swift in Sources */,
+				ED748D5826516FC600936335 /* QuizzesPresenter.swift in Sources */,
 				EDCA4375262740E80009E250 /* QuizCategory.swift in Sources */,
 				ED7CD3F5264FD97D00EE3C2D /* RequestError.swift in Sources */,
-				EDCC56782643E4C6007F969D /* ThemeConstants.swift in Sources */,
 				EDEE224D2626E30C00336B2C /* AppDelegate.swift in Sources */,
 				EDBAF2FC262746230036B977 /* QuizzesViewController.swift in Sources */,
+				ED748D5E26518BA000936335 /* QuestionPresenter.swift in Sources */,
 				EDCC568126446F2D007F969D /* AppRouter.swift in Sources */,
 				EDCA4379262740E80009E250 /* DataServiceProtocol.swift in Sources */,
 				EDCC568926455BFC007F969D /* QuizPageViewController.swift in Sources */,
 				EDEE224F2626E30C00336B2C /* SceneDelegate.swift in Sources */,
 				EDBAF2FF262762230036B977 /* QuizCard.swift in Sources */,
 				EDCC568B264597D8007F969D /* QuizResultViewController.swift in Sources */,
+				ED748D5C265181AD00936335 /* QuizPresenter.swift in Sources */,
 				ED7CD3F3264E91DE00EE3C2D /* NetworkServiceProtocol.swift in Sources */,
 				EDCA4376262740E80009E250 /* Question.swift in Sources */,
 				EDCA4374262740E80009E250 /* DataService.swift in Sources */,

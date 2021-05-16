@@ -4,20 +4,21 @@
 //
 //  Created by Ivan Skorupan on 07.05.2021..
 //
+
 import Foundation
 import SnapKit
 import UIKit
 
 class QuestionTrackerView: UIView {
     
-    private var pageController: QuizPageViewController!
+    private var quizPresenter: QuizPresenter!
     
     private var progressLabel: UILabel!
     private var progressStack: UIStackView!
     
-    convenience init(pageController: QuizPageViewController) {
+    convenience init(quizPresenter: QuizPresenter) {
         self.init()
-        self.pageController = pageController
+        self.quizPresenter = quizPresenter
         
         createViews()
         styleViews()
@@ -33,14 +34,14 @@ class QuestionTrackerView: UIView {
     }
     
     func styleViews() {
-        let currentQuestion = pageController.getCurrentQuestion()
-        let totalQuestions = pageController.getNumberOfQuestions()
+        let currentQuestion = quizPresenter.getCurrentQuestionIndex()
+        let totalQuestions = quizPresenter.getNumberOfQuestions()
         
         progressLabel.textColor = .white
         progressLabel.font = UIFont(name: "SourceSansPro-Bold", size: 18)
         progressLabel.text = "\(currentQuestion + 1)/\(totalQuestions)"
         
-        let answers = pageController.getAnswers()
+        let answers = quizPresenter.getAnswers()
         
         for i in 0...(totalQuestions - 1) {
             let rect = UIView()

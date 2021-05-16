@@ -4,6 +4,7 @@
 //
 //  Created by Ivan Skorupan on 06.05.2021..
 //
+
 import UIKit
 
 protocol AppRouterProtocol {
@@ -13,7 +14,7 @@ protocol AppRouterProtocol {
     func showTabBarController()
     func showQuizzesController()
     func showQuizController(quiz: Quiz)
-    func showQuizResultController(pageController: QuizPageViewController)
+    func showQuizResultController(quizPresenter: QuizPresenter)
 }
 
 class AppRouter: AppRouterProtocol {
@@ -56,9 +57,10 @@ class AppRouter: AppRouterProtocol {
         navigationController.pushViewController(vc, animated: true)
     }
     
-    func showQuizResultController(pageController: QuizPageViewController) {
-        let vc = QuizResultViewController(router: self, pageController: pageController)
+    func showQuizResultController(quizPresenter: QuizPresenter) {
+        let vc = QuizResultViewController(router: self, quizPresenter: quizPresenter)
         navigationController.pushViewController(vc, animated: true)
     }
     
 }
+

@@ -23,6 +23,7 @@ class CustomTabBarController: UITabBarController {
         tabBar.backgroundColor = .white
         
         quizzesController.tabBarItem = UITabBarItem(title: "Quiz", image: UIImage(named: "quiz"), selectedImage: UIImage(named: "quiz-selected"))
+        
         settingsController.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "settings"), selectedImage: UIImage(named: "settings-selected"))
     }
     
