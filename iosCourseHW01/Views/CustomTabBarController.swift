@@ -17,12 +17,15 @@ class CustomTabBarController: UITabBarController {
         self.router = router
         
         let quizzesController = QuizzesViewController(router: router)
+        let searchQuizController = SearchQuizViewController(router: router)
         let settingsController = SettingsViewController(router: router)
         
-        viewControllers = [quizzesController, settingsController]
+        viewControllers = [quizzesController, searchQuizController, settingsController]
         tabBar.backgroundColor = .white
         
         quizzesController.tabBarItem = UITabBarItem(title: "Quiz", image: UIImage(named: "quiz"), selectedImage: UIImage(named: "quiz-selected"))
+        
+        searchQuizController.tabBarItem = UITabBarItem(title: "Search", image: UIImage(named: "search"), selectedImage: UIImage(named: "search-selected"))
         
         settingsController.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "settings"), selectedImage: UIImage(named: "settings-selected"))
     }

@@ -19,14 +19,13 @@ class QuizzesViewController: GradientViewController, QuizzesViewDelegate {
     private var quizzesView: UIView!
     
     private var appNameLabel: UILabel!
-    private var getQuizButton: UIButton!
     private var funFactLabel: UILabel!
     private var nbaCountLabel: UILabel!
     private var quizTable: UITableView!
     
     private var errorLabel: UILabel!
     
-    private let quizzesPresenter = QuizzesPresenter(networkService: NetworkService())
+    private let quizzesPresenter = QuizzesPresenter(quizRepository: QuizRepository())
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,9 +35,9 @@ class QuizzesViewController: GradientViewController, QuizzesViewDelegate {
         createViews()
         styleViews()
         createConstraints()
-        addActions()
         
         quizzesPresenter.setViewDelegate(quizzesViewDelegate: self)
+        quizzesPresenter.fetchQuizzes()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,9 +53,6 @@ class QuizzesViewController: GradientViewController, QuizzesViewDelegate {
         
         appNameLabel = UILabel()
         quizzesView.addSubview(appNameLabel)
-        
-        getQuizButton = UIButton()
-        quizzesView.addSubview(getQuizButton)
         
         funFactLabel = UILabel()
         quizzesView.addSubview(funFactLabel)
@@ -79,12 +75,6 @@ class QuizzesViewController: GradientViewController, QuizzesViewDelegate {
         appNameLabel.text = "PopQuiz"
         appNameLabel.textColor = .white
         appNameLabel.font = UIFont(name: "SourceSansPro-Bold", size: 24)
-        
-        getQuizButton.setTitle("Get Quiz", for: .normal)
-        getQuizButton.backgroundColor = .white
-        getQuizButton.setTitleColor(UIColor(hex: "#6329DEFF"), for: .normal)
-        getQuizButton.layer.cornerRadius = 2 * CORNER_RADIUS
-        getQuizButton.titleLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 16)
         
         funFactLabel.text = "💡 Fun Fact"
         funFactLabel.textColor = .white
@@ -124,15 +114,9 @@ class QuizzesViewController: GradientViewController, QuizzesViewDelegate {
             make.centerX.equalToSuperview()
         }
         
-        getQuizButton.snp.makeConstraints { make -> Void in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(appNameLabel.snp.bottom).offset(20)
-            make.size.equalTo(CGSize(width: 250, height: 35))
-        }
-        
         funFactLabel.snp.makeConstraints { make -> Void in
             make.left.right.equalToSuperview()
-            make.top.equalTo(getQuizButton.snp.bottom).offset(30)
+            make.top.equalTo(appNameLabel.snp.bottom).offset(30)
         }
         
         nbaCountLabel.snp.makeConstraints { make -> Void in
@@ -149,10 +133,6 @@ class QuizzesViewController: GradientViewController, QuizzesViewDelegate {
             make.left.right.equalToSuperview()
             make.bottom.equalTo(quizzesView.safeAreaLayoutGuide.snp.bottom)
         }
-    }
-    
-    private func addActions() {
-        getQuizButton.addTarget(self, action: #selector(getQuizzes), for: .touchUpInside)
     }
     
     func showErrorLabel() {
@@ -173,11 +153,6 @@ class QuizzesViewController: GradientViewController, QuizzesViewDelegate {
         
         self.quizTable.reloadData()
         self.quizTable.isHidden = false
-    }
-    
-    @objc
-    private func getQuizzes() {
-        quizzesPresenter.fetchQuizzes()
     }
     
 }
