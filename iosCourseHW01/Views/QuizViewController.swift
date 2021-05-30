@@ -2,16 +2,16 @@
 //  QuizViewController.swift
 //  iosCourseHW01
 //
-//  Created by SofaScore Akademija on 06.05.2021..
+//  Created by Ivan Skorupan on 06.05.2021..
 //
+
 import UIKit
 
-class QuizViewController: GradientViewController {
+class QuizViewController: GradientViewController, QuizViewDelegate {
     
     private let CORNER_RADIUS: CGFloat = 10
     
-    private var pageController: QuizPageViewController!
-    private var question: Question!
+    private let questionPresenter = QuestionPresenter()
     
     private var insetView: UIView!
     private var questionTrackerView: UIView!
@@ -19,10 +19,10 @@ class QuizViewController: GradientViewController {
     
     private var answerButtons: [UIButton] = []
     
-    convenience init(router: AppRouterProtocol, question: Question, pageController: QuizPageViewController) {
+    convenience init(router: AppRouterProtocol, question: Question, quizPresenter: QuizPresenter) {
         self.init(router: router)
-        self.question = question
-        self.pageController = pageController
+        questionPresenter.setQuestion(question: question)
+        questionPresenter.setQuizPresenter(quizPresenter: quizPresenter)
     }
     
     override func viewDidLoad() {
@@ -33,6 +33,8 @@ class QuizViewController: GradientViewController {
         styleViews()
         createConstraints()
         addActions()
+        
+        questionPresenter.setViewDelegate(quizViewDelegate: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,13 +57,13 @@ class QuizViewController: GradientViewController {
         insetView = UIView()
         view.addSubview(insetView)
         
-        questionTrackerView = QuestionTrackerView(pageController: pageController)
+        questionTrackerView = QuestionTrackerView(quizPresenter: questionPresenter.getQuizPresenter())
         insetView.addSubview(questionTrackerView)
         
         questionLabel = UILabel()
         insetView.addSubview(questionLabel)
         
-        for _ in 0...(question.answers.count - 1) {
+        for _ in 0...(questionPresenter.getQuestion().answers.count - 1) {
             let answerButton = UIButton()
             insetView.addSubview(answerButton)
             answerButtons.append(answerButton)
@@ -69,6 +71,8 @@ class QuizViewController: GradientViewController {
     }
     
     func styleViews() {
+        let question = questionPresenter.getQuestion()
+        
         questionLabel.text = question.question
         questionLabel.font = UIFont(name: "SourceSansPro-Bold", size: 24)
         questionLabel.textColor = .white
@@ -77,7 +81,7 @@ class QuizViewController: GradientViewController {
         for i in 0...(question.answers.count - 1) {
             let answerButton = answerButtons[i]
             
-            answerButton.setTitle(question.answers[i], for: .normal)
+            answerButton.setTitle(questionPresenter.getAnswer(index: i), for: .normal)
             answerButton.backgroundColor = UIColor.white.withAlphaComponent(0.3)
             answerButton.titleLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 20)
             answerButton.layer.cornerRadius = CORNER_RADIUS
@@ -102,7 +106,7 @@ class QuizViewController: GradientViewController {
             make.left.width.equalToSuperview()
         }
         
-        for i in 0...(question.answers.count - 1) {
+        for i in 0...(questionPresenter.getQuestion().answers.count - 1) {
             let answerButton = answerButtons[i]
             
             answerButton.snp.makeConstraints { make -> Void in
@@ -118,45 +122,21 @@ class QuizViewController: GradientViewController {
         }
     }
     
+    func markCorrectButtonGreen(index: Int) {
+        answerButtons[index].backgroundColor = UIColor(hex: "#6FCF97FF")
+    }
+    
+    func markWrongButtonRed(index: Int) {
+        answerButtons[index].backgroundColor = UIColor(hex: "#FC6565FF")
+    }
+    
     @objc
     private func questionAnswered(sender: UIButton) {
-        let correctAnswer = question.correctAnswer
-        let tag = sender.tag
-        
         for answerButton in answerButtons {
             answerButton.isEnabled = false
         }
         
-        if tag == correctAnswer {
-            
-        }
-        
-        for i in 0...(answerButtons.count - 1) {
-            let answerButton = answerButtons[i]
-            
-            if i == correctAnswer {
-                answerButton.backgroundColor = UIColor(hex: "#6FCF97FF")
-                
-                if i == tag {
-                    pageController.setAnswer(correct: true)
-                }
-            } else if i == tag {
-                answerButton.backgroundColor = UIColor(hex: "#FC6565FF")
-                pageController.setAnswer(correct: false)
-            }
-        }
-        
-        let currentQuestion = pageController.getCurrentQuestion()
-        let questionCount = pageController.getNumberOfQuestions()
-        
-        let seconds = 1.0
-        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
-            if currentQuestion < questionCount - 1 {
-                self.pageController.nextQuestion()
-            } else {
-                self.router.showQuizResultController(pageController: self.pageController)
-            }
-        }
+        questionPresenter.checkAnswer(tag: sender.tag)
     }
     
 }

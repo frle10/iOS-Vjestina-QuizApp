@@ -8,7 +8,7 @@ import Foundation
 import SnapKit
 import UIKit
 
-class LoginViewController: GradientViewController {
+class LoginViewController: GradientViewController, LoginViewDelegate {
     
     private let CORNER_RADIUS: CGFloat = 10
     
@@ -18,7 +18,7 @@ class LoginViewController: GradientViewController {
     private var loginButton: UIButton!
     private var errorLabel: UILabel!
     
-    private var dataService = DataService()
+    private let loginPresenter = LoginPresenter(networkService: NetworkService())
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +27,8 @@ class LoginViewController: GradientViewController {
         styleViews()
         createConstraints()
         addActions()
+        
+        loginPresenter.setViewDelegate(loginViewDelegate: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,7 +76,6 @@ class LoginViewController: GradientViewController {
         loginButton.titleLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 16)
         loginButton.isEnabled = false
         
-        errorLabel.text = "Login unsuccessful."
         errorLabel.font = UIFont(name: "SourceSansPro-Regular", size: 14)
         errorLabel.textColor = .white
         errorLabel.isHidden = true
@@ -116,22 +117,25 @@ class LoginViewController: GradientViewController {
         loginButton.addTarget(self, action: #selector(login), for: .touchUpInside)
     }
     
+    func updateErrorLabel(text: String) {
+        self.errorLabel.text = text
+        self.errorLabel.isHidden = false
+    }
+    
+    func goToTabBarController() {
+        self.router.showTabBarController()
+    }
+    
     @objc
     private func textfieldChanged() {
         errorLabel.isHidden = true
         loginButton.isEnabled = emailTextField.text != "" && passwordTextField.text != ""
-        loginButton.backgroundColor = loginButton.isEnabled ? UIColor.white : UIColor.white.withAlphaComponent(0.5);
+        loginButton.backgroundColor = loginButton.isEnabled ? .white : UIColor.white.withAlphaComponent(0.5);
     }
     
     @objc
     private func login() {
-        let loginResult = dataService.login(email: emailTextField.text!, password: passwordTextField.text!)
-        
-        if case LoginStatus.success = loginResult {
-            router.showTabBarController()
-        } else {
-            errorLabel.isHidden = false
-        }
+        loginPresenter.login(username: emailTextField.text!, password: passwordTextField.text!)
     }
     
 }

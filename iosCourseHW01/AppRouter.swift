@@ -4,6 +4,7 @@
 //
 //  Created by Ivan Skorupan on 06.05.2021..
 //
+
 import UIKit
 
 protocol AppRouterProtocol {
@@ -13,11 +14,12 @@ protocol AppRouterProtocol {
     func showTabBarController()
     func showQuizzesController()
     func showQuizController(quiz: Quiz)
-    func showQuizResultController(pageController: QuizPageViewController)
+    func showQuizResultController(quizPresenter: QuizPresenter)
 }
 
 class AppRouter: AppRouterProtocol {
-    private let navigationController: UINavigationController!
+    
+    private let navigationController: UINavigationController
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -37,17 +39,17 @@ class AppRouter: AppRouterProtocol {
     }
     
     func showLoginController() {
-        navigationController.popToRootViewController(animated: true)
+        let vc = LoginViewController(router: self)
+        navigationController.setViewControllers([vc], animated: true)
     }
     
     func showTabBarController() {
         let tabBarController = CustomTabBarController(router: self)
-        navigationController.pushViewController(tabBarController, animated: true)
+        navigationController.setViewControllers([tabBarController], animated: true)
     }
     
     func showQuizzesController() {
-        let vc = QuizzesViewController(router: self)
-        navigationController.pushViewController(vc, animated: true)
+        navigationController.popToRootViewController(animated: true)
     }
     
     func showQuizController(quiz: Quiz) {
@@ -55,9 +57,10 @@ class AppRouter: AppRouterProtocol {
         navigationController.pushViewController(vc, animated: true)
     }
     
-    func showQuizResultController(pageController: QuizPageViewController) {
-        let vc = QuizResultViewController(router: self, pageController: pageController)
+    func showQuizResultController(quizPresenter: QuizPresenter) {
+        let vc = QuizResultViewController(router: self, quizPresenter: quizPresenter)
         navigationController.pushViewController(vc, animated: true)
     }
     
 }
+

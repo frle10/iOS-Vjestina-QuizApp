@@ -4,11 +4,12 @@
 //
 //  Created by Ivan Skorupan on 14.04.2021..
 //
+
 import Foundation
 import SnapKit
 import UIKit
 
-class QuizzesViewController: GradientViewController {
+class QuizzesViewController: GradientViewController, QuizzesViewDelegate {
     
     private let CORNER_RADIUS: CGFloat = 10
     
@@ -23,9 +24,9 @@ class QuizzesViewController: GradientViewController {
     private var nbaCountLabel: UILabel!
     private var quizTable: UITableView!
     
-    private var dataService: DataService = DataService()
-    private var quizzes: [Quiz] = []
-    private var categories: [QuizCategory] = []
+    private var errorLabel: UILabel!
+    
+    private let quizzesPresenter = QuizzesPresenter(networkService: NetworkService())
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,8 @@ class QuizzesViewController: GradientViewController {
         styleViews()
         createConstraints()
         addActions()
+        
+        quizzesPresenter.setViewDelegate(quizzesViewDelegate: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,6 +63,9 @@ class QuizzesViewController: GradientViewController {
         
         nbaCountLabel = UILabel()
         quizzesView.addSubview(nbaCountLabel)
+        
+        errorLabel = UILabel()
+        quizzesView.addSubview(errorLabel)
         
         quizTable = UITableView()
         quizzesView.addSubview(quizTable)
@@ -90,6 +96,11 @@ class QuizzesViewController: GradientViewController {
         nbaCountLabel.textColor = .white
         nbaCountLabel.font = UIFont(name: "SourceSansPro-SemiBold", size: 18)
         nbaCountLabel.numberOfLines = 0
+        
+        errorLabel.text = "Data can't be reached."
+        errorLabel.textColor = .white
+        errorLabel.font = UIFont(name: "SourceSansPro-Regular", size: 16)
+        errorLabel.isHidden = true
         
         quizTable.backgroundColor = .clear
         quizTable.rowHeight = 150
@@ -129,6 +140,10 @@ class QuizzesViewController: GradientViewController {
             make.left.right.equalToSuperview()
         }
         
+        errorLabel.snp.makeConstraints { make -> Void in
+            make.center.equalToSuperview()
+        }
+        
         quizTable.snp.makeConstraints { make -> Void in
             make.top.equalTo(nbaCountLabel.snp.bottom).offset(20)
             make.left.right.equalToSuperview()
@@ -140,22 +155,29 @@ class QuizzesViewController: GradientViewController {
         getQuizButton.addTarget(self, action: #selector(getQuizzes), for: .touchUpInside)
     }
     
+    func showErrorLabel() {
+        funFactLabel.isHidden = true
+        nbaCountLabel.isHidden = true
+        quizTable.isHidden = true
+        
+        errorLabel.isHidden = false
+    }
+    
+    func updateTableData() {
+        errorLabel.isHidden = true
+        
+        self.nbaCountLabel.text = "There are \(quizzesPresenter.getNbaCount()) questions that contain the word \"NBA\""
+        self.nbaCountLabel.isHidden = false
+        
+        self.funFactLabel.isHidden = false
+        
+        self.quizTable.reloadData()
+        self.quizTable.isHidden = false
+    }
+    
     @objc
     private func getQuizzes() {
-        quizzes = dataService.fetchQuizes()
-        categories = Array(Set(quizzes.map { $0.category })).sorted { $0.rawValue > $1.rawValue }
-        
-        let nbaCount = quizzes.map { $0.questions.filter { $0.question.contains("NBA") } }
-            .map { $0.count }
-            .reduce(0, { $0 + $1 })
-        
-        nbaCountLabel.text = "There are \(nbaCount) questions that contain the word \"NBA\""
-        nbaCountLabel.isHidden = false
-        
-        funFactLabel.isHidden = false
-        
-        quizTable.reloadData()
-        quizTable.isHidden = false
+        quizzesPresenter.fetchQuizzes()
     }
     
 }
@@ -163,18 +185,17 @@ class QuizzesViewController: GradientViewController {
 extension QuizzesViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return categories.count
+        return quizzesPresenter.getCategories().count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return quizzes.map { $0.category }.filter { $0 == categories[section] }.count
+        return quizzesPresenter.numberOfRowsInSection(section: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: QuizCard = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! QuizCard
         
-        let quizzesInSection: [Quiz] = quizzes.filter { $0.category == categories[indexPath.section] }
-        let currentQuiz: Quiz = quizzesInSection[indexPath.row]
+        let currentQuiz: Quiz = quizzesPresenter.getCurrentQuiz(section: indexPath.section, row: indexPath.row)
         
         cell.title.text = currentQuiz.title
         cell.desc.text = currentQuiz.description
@@ -189,7 +210,7 @@ extension QuizzesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UILabel()
         headerView.textColor = UIColor(hex: "#F2C94CFF")
-        headerView.text = categories[section].rawValue
+        headerView.text = quizzesPresenter.getCategories()[section].rawValue
         headerView.font = UIFont(name: "SourceSansPro-Bold", size: 20)
         
         return headerView
@@ -202,9 +223,7 @@ extension QuizzesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let quizzesInSection: [Quiz] = quizzes.filter { $0.category == categories[indexPath.section] }
-        let currentQuiz: Quiz = quizzesInSection[indexPath.row]
-        
+        let currentQuiz: Quiz = quizzesPresenter.getCurrentQuiz(section: indexPath.section, row: indexPath.row)
         router.showQuizController(quiz: currentQuiz)
     }
     
