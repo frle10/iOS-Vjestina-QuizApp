@@ -14,15 +14,15 @@ protocol QuizzesViewDelegate: NSObjectProtocol {
 
 class QuizzesPresenter {
     
-    private let networkService: NetworkService
+    private let quizRepository: QuizRepository
     weak private var quizzesViewDelegate: QuizzesViewDelegate?
     
     private var quizzes: [Quiz] = []
     private var categories: [QuizCategory] = []
     private var nbaCount: Int = 0
     
-    init(networkService: NetworkService) {
-        self.networkService = networkService
+    init(quizRepository: QuizRepository) {
+        self.quizRepository = quizRepository
     }
     
     func setViewDelegate(quizzesViewDelegate: QuizzesViewDelegate?) {
@@ -30,27 +30,26 @@ class QuizzesPresenter {
     }
     
     func fetchQuizzes() {
-        let defaults = UserDefaults.standard
-        let token = defaults.string(forKey: "token")
-        
-        let netConnection = NetMonitor.shared
-        let status = netConnection.netOn
-        
-        if status {
-            networkService.fetchQuizzes(token: token!) { quizzes in
-                self.quizzes = quizzes
+            quizRepository.fetchQuizzes { [weak self] quizzes in
+                guard let self = self else { return }
                 
-                self.categories = Array(Set(quizzes.map { $0.category })).sorted { $0.rawValue > $1.rawValue }
-                
-                self.nbaCount = quizzes.map { $0.questions.filter { $0.question.contains("NBA") } }
-                    .map { $0.count }
-                    .reduce(0, { $0 + $1 })
-                
-                self.quizzesViewDelegate?.updateTableData()
+                if !quizzes.isEmpty {
+                    self.quizzes = quizzes
+                    
+                    self.categories = Array(Set(quizzes.map { $0.category })).sorted { $0.rawValue > $1.rawValue }
+                    
+                    self.nbaCount = quizzes.map { $0.questions.filter { $0.question.contains("NBA") } }
+                        .map { $0.count }
+                        .reduce(0, { $0 + $1 })
+                    
+                    self.quizzesViewDelegate?.updateTableData()
+                    
+                    self.quizRepository.clearQuizzes()
+                    self.quizRepository.saveQuizzes(quizzes: quizzes)
+                } else {
+                    self.quizzesViewDelegate?.showErrorLabel()
+                }
             }
-        } else {
-            quizzesViewDelegate?.showErrorLabel()
-        }
     }
     
     func getCurrentQuiz(section: Int, row: Int) -> Quiz {
