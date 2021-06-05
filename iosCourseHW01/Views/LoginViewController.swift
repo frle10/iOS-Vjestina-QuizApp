@@ -12,11 +12,11 @@ class LoginViewController: GradientViewController, LoginViewDelegate {
     
     private let CORNER_RADIUS: CGFloat = 10
     
-    private var appNameLabel: UILabel!
-    private var emailTextField: UITextField!
-    private var passwordTextField: UITextField!
-    private var loginButton: UIButton!
-    private var errorLabel: UILabel!
+    var appNameLabel: UILabel!
+    var emailTextField: UITextField!
+    var passwordTextField: UITextField!
+    var loginButton: UIButton!
+    var errorLabel: UILabel!
     
     private let loginPresenter = LoginPresenter(networkService: NetworkService())
     
@@ -34,6 +34,40 @@ class LoginViewController: GradientViewController, LoginViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         emailTextField.text = ""
         passwordTextField.text = ""
+        
+        appNameLabel.transform = appNameLabel.transform.scaledBy(x: 0, y: 0)
+        appNameLabel.alpha = 0
+        
+        emailTextField.transform = emailTextField.transform.translatedBy(x: -view.frame.width, y: 0)
+        emailTextField.alpha = 0
+        
+        passwordTextField.transform = passwordTextField.transform.translatedBy(x: -view.frame.width, y: 0)
+        passwordTextField.alpha = 0
+        
+        loginButton.transform = loginButton.transform.translatedBy(x: -view.frame.width, y: 0)
+        loginButton.alpha = 0
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UIView.animate(withDuration: 1.5, delay: 0, options: .curveEaseInOut, animations: {
+            self.appNameLabel.transform = .identity
+            self.appNameLabel.alpha = 1
+            
+            self.emailTextField.transform = .identity
+            self.emailTextField.alpha = 1
+        })
+        
+        UIView.animate(withDuration: 1.5, delay: 0.25, options: .curveEaseInOut, animations: {
+            self.passwordTextField.transform = .identity
+            self.passwordTextField.alpha = 1
+        })
+        
+        UIView.animate(withDuration: 1.5, delay: 0.5, options: .curveEaseInOut, animations: {
+            self.loginButton.transform = .identity
+            self.loginButton.alpha = 1
+        })
     }
     
     private func createViews() {
@@ -124,6 +158,26 @@ class LoginViewController: GradientViewController, LoginViewDelegate {
     
     func goToTabBarController() {
         self.router.showTabBarController()
+    }
+    
+    func animateSuccessfulLogin() {
+        UIView.animate(withDuration: 1.5, animations: {
+            self.appNameLabel.transform = self.appNameLabel.transform.translatedBy(x: 0, y: -self.view.frame.height)
+        })
+        
+        UIView.animate(withDuration: 1.5, delay: 0.25, animations: {
+            self.emailTextField.transform = self.emailTextField.transform.translatedBy(x: 0, y: -self.view.frame.height)
+        })
+        
+        UIView.animate(withDuration: 1.5, delay: 0.5, animations: {
+            self.passwordTextField.transform = self.passwordTextField.transform.translatedBy(x: 0, y: -self.view.frame.height)
+        })
+        
+        UIView.animate(withDuration: 1.5, delay: 0.75, animations: {
+            self.loginButton.transform = self.loginButton.transform.translatedBy(x: 0, y: -self.view.frame.height)
+        }, completion: { _ in
+            self.goToTabBarController()
+        })
     }
     
     @objc
