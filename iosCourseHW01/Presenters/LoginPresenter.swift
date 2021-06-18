@@ -11,6 +11,7 @@ import Network
 protocol LoginViewDelegate: NSObjectProtocol {
     func updateErrorLabel(text: String)
     func goToTabBarController()
+    func animateSuccessfulLogin()
 }
 
 class LoginPresenter {
@@ -33,7 +34,7 @@ class LoginPresenter {
         if status {
             networkService.login(email: username, password: password) { loginStatus in
                 if case LoginStatus.success = loginStatus {
-                    self.loginViewDelegate?.goToTabBarController()
+                    self.loginViewDelegate?.animateSuccessfulLogin()
                 } else {
                     self.loginViewDelegate?.updateErrorLabel(text: "Login unsuccessful.")
                 }
